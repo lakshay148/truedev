@@ -9,27 +9,34 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.truedev.application.Adapters.CapturedImagesAdapter;
 import com.truedev.application.Utils.Constants;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Lakshay on 18-02-2015.
  */
-public class CameraActivity extends Activity implements View.OnClickListener{
+public class CameraActivity extends Activity implements View.OnClickListener,Camera.PictureCallback {
 
     private static final String TAG = "CameraActivity";
     private Camera camera;
     private ImageView capturedImageView;
     private LinearLayout llCapturedImages;
+    private ArrayList<ImageInfo> imagesList = new ArrayList<ImageInfo>();
+    private CapturedImagesAdapter imagesAdapter;
+    private ListView lvCaptureImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,70 +44,78 @@ public class CameraActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.camera_items);
 
         try {
-            camera = Camera.open(); // attempt to get a Camera instance
-        }
-        catch (Exception e){
+            // attempt to get a Camera instance
+            camera = Camera.open();
+        } catch (Exception e) {
             // Camera is not available (in use or does not exist)
             Log.e("Camera Open Exception", "" + e.getMessage());
         }
 
-        capturedImageView = (ImageView) findViewById(R.id.ivCaptured);
-        CameraPreview cameraPreview = new CameraPreview(this,camera);
+        CameraPreview cameraPreview = new CameraPreview(this, camera);
         FrameLayout camera_lLayout = (FrameLayout) findViewById(R.id.camera_preview);
         camera_lLayout.addView(cameraPreview);
+
+        //set the screen layout to fullscreen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         findViewById(R.id.button_capture).setOnClickListener(this);
-        llCapturedImages = (LinearLayout) findViewById(R.id.llCapturedImages);
+        Button doneButton = (Button)findViewById(R.id.bDone);
+        doneButton.setOnClickListener(this);
         findViewById(R.id.bBack).setOnClickListener(this);
+
+        capturedImageView = (ImageView) findViewById(R.id.ivCaptured);
+//        llCapturedImages = (LinearLayout) findViewById(R.id.llCapturedImages);
+        lvCaptureImages = (ListView) findViewById(R.id.lvCapturedImages);
+        imagesAdapter = new CapturedImagesAdapter(this, imagesList );
+        lvCaptureImages.setAdapter(imagesAdapter);
+        imagesAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.button_capture:
-                camera.takePicture(null,null,mPicture);
+                camera.takePicture(null, null, this);
                 break;
 
             case R.id.bBack:
                 finish();
                 break;
+
+            case R.id.bDone:
+                break;
         }
     }
 
-    Camera.PictureCallback mPicture = new Camera.PictureCallback() {
-        @Override
-        public void onPictureTaken(byte[] data, Camera camera) {
+    private void updateCapturedPhotos(File pictureFile) {
+        ImageInfo imageInfo = new ImageInfo(pictureFile.getAbsolutePath());
+//        imagesList.add(imageInfo);
+        imagesAdapter.getImageInfoArrayList().add(imageInfo);
+        imagesAdapter.notifyDataSetChanged();
+        lvCaptureImages.smoothScrollToPosition(imagesAdapter.getCount()-1);
+        camera.startPreview();
+    }
 
-            File pictureFile = Constants.getMediaOutputFile(Constants.TYPE_IMAGE);
-            Log.d(TAG,pictureFile.getAbsolutePath().toString()+"");
-            if (pictureFile == null){
-                Log.d(TAG, "Error creating media file, check storage permissions: " +
-                        "");
-                return;
-            }
-            try {
-
-                FileOutputStream fos = new FileOutputStream(pictureFile);
-                fos.write(data);
-                fos.close();
-                final BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 8;
-
-                Bitmap bitmap = BitmapFactory.decodeFile(pictureFile.getAbsolutePath(),options);
-                RelativeLayout imageLayout = (RelativeLayout) getLayoutInflater().inflate(R.layout.captured_images_overlay,null);
-                ImageView imageView = (ImageView)imageLayout.findViewById(R.id.ivCaptured);
-                imageView.setImageBitmap(bitmap);
-                llCapturedImages.addView(imageLayout);
-                camera.startPreview();
-
-            } catch (FileNotFoundException e) {
-                Log.d(TAG, "File not found: " + e.getMessage());
-            } catch (IOException e) {
-                Log.d(TAG, "Error accessing file: " + e.getMessage());
-            }
+    @Override
+    public void onPictureTaken(byte[] data, Camera camera) {
+        File pictureFile = Constants.getMediaOutputFile(Constants.TYPE_IMAGE);
+        Log.d(TAG, pictureFile.getAbsolutePath().toString() + "");
+        if (pictureFile == null) {
+            Log.d(TAG, "Error creating media file, check storage permissions: " +
+                    "");
+            return;
         }
-    };
+        try
+        {
+            FileOutputStream fos = new FileOutputStream(pictureFile);
+            fos.write(data);
+            fos.close();
+            updateCapturedPhotos(pictureFile);
+        } catch (FileNotFoundException e) {
+            Log.d(TAG, "File not found: " + e.getMessage());
+        } catch (IOException e) {
+            Log.d(TAG, "Error accessing file: " + e.getMessage());
+        }
+    }
 }

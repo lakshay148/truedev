@@ -33,6 +33,7 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.camera_fragment,container,false);
         rootView.findViewById(R.id.bTakePhoto).setOnClickListener(this);
+        rootView.findViewById(R.id.bFromGallery).setOnClickListener(this);
         return rootView;
     }
 
@@ -43,6 +44,9 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
             case R.id.bTakePhoto:
                 Intent intent = new Intent(getActivity(), CameraActivity.class);
                 startActivity(intent);
+                break;
+
+            case R.id.bFromGallery:
                 break;
         }
     }

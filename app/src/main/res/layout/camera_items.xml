@@ -15,17 +15,23 @@
         android:layout_alignParentRight="true"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/llCapturedImages"
+        <!--<LinearLayout-->
+            <!--android:id="@+id/llCapturedImages"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</LinearLayout>-->
+
+        <ListView
+            android:id="@+id/lvCapturedImages"
             android:layout_width="match_parent"
-            android:orientation="vertical"
             android:layout_height="wrap_content">
-        </LinearLayout>
+
+            </ListView>
         </ScrollView>
 
 
     <LinearLayout
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -34,17 +40,22 @@
             android:id="@+id/bBack"
             android:background="@drawable/camera_button_background"
             android:text="Back"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/camera_button_width"
+            android:layout_height="@dimen/camera_button_height"
              />
         <Button
             android:id="@+id/button_capture"
             android:text="Capture"
             android:background="@drawable/camera_button_background"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
+            android:layout_width="@dimen/camera_button_width"
+            android:layout_height="@dimen/camera_button_height"
             />
+        <Button
+            android:id="@+id/bDone"
+            android:text="Done"
+            android:background="@drawable/camera_button_background"
+            android:layout_width="@dimen/camera_button_width"
+            android:layout_height="@dimen/camera_button_height" />
         </LinearLayout>
 
 

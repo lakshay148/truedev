@@ -9,4 +9,10 @@
         android:background="@drawable/captured_image_background"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_overlay_height" />
+    <ImageView
+        android:id="@+id/ivRemoveImage"
+        android:src="@drawable/close_layer"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
