@@ -3,6 +3,7 @@ package com.truedev.application;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import com.commonsware.cwac.camera.CameraHostProvider;
 import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.truedev.application.Fragment.AnalyticsFragment;
 import com.truedev.application.Fragment.CameraItemsFragment;
+import com.truedev.application.Fragment.MapsFragment;
 import com.truedev.application.Utils.Constants;
 
 import static com.truedev.application.Utils.Constants.OPEN_FRAGMENT;
@@ -21,12 +23,15 @@ import com.facebook.Session;
 
 public class ItemActivity extends Activity implements CameraHostProvider{
 
+    private static final String TAG = "ItemActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_activity);
         if (savedInstanceState == null) {
             String openFragment = (String) getIntent().getExtras().get(OPEN_FRAGMENT);
+            Log.e(TAG,"Fragment to open :: "+ openFragment);
             initializeFragment(openFragment);
         }
     }
@@ -43,6 +48,11 @@ public class ItemActivity extends Activity implements CameraHostProvider{
             case Constants.CAMERA_ITEMS:
                 getFragmentManager().beginTransaction()
                         .add(R.id.container, new CameraItemsFragment()).commit();
+                break;
+
+            case Constants.MAPS:
+                Log.e(TAG,"Maps fragment");
+                getFragmentManager().beginTransaction().add(R.id.container,new MapsFragment()).commit();
                 break;
         }
     }

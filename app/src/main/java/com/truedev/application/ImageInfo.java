@@ -1,9 +1,11 @@
 package com.truedev.application;
 
+import java.io.Serializable;
+
 /**
  * Created by Lakshay on 19-02-2015.
  */
-public class ImageInfo {
+public class ImageInfo implements Serializable{
 
     Long id;
     String imagePath;

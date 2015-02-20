@@ -22,4 +22,11 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
+    <GridView
+        android:id="@+id/gvPhotos"
+        android:columnWidth="@dimen/grid_column_width"
+        android:numColumns="auto_fit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></GridView>
 </LinearLayout>

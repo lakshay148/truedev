@@ -1,6 +1,7 @@
 package com.truedev.application;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 public class CameraActivity extends Activity implements View.OnClickListener,Camera.PictureCallback {
 
     private static final String TAG = "CameraActivity";
+    public static final String CAMERA_IMAGES = "captured_images";
     private Camera camera;
     private ImageView capturedImageView;
     private LinearLayout llCapturedImages;
@@ -84,6 +86,10 @@ public class CameraActivity extends Activity implements View.OnClickListener,Cam
                 break;
 
             case R.id.bDone:
+                Intent intent = new Intent();
+                intent.putExtra(CAMERA_IMAGES,imagesAdapter.getImageInfoArrayList());
+                setResult(RESULT_OK,intent);
+                finish();
                 break;
         }
     }

@@ -24,7 +24,8 @@ public class Constants {
     public static String NAVIGATION_DRAWER = "Navigation Drawers";
     public static String NOTIFICATIONS = "Notifications";
 
-    public static String[] allItems = new String[]{ANALYTICS,LISTVIEWS,NAVIGATION_DRAWER,NOTIFICATIONS,CAMERA_ITEMS};
+    public static final String MAPS = "Maps";
+    public static String[] allItems = new String[]{ANALYTICS,LISTVIEWS,NAVIGATION_DRAWER,MAPS,NOTIFICATIONS,CAMERA_ITEMS};
 
     public static HashMap<String,String> getItemsFragments()
     {

@@ -14,6 +14,7 @@ import com.truedev.application.ImageInfo;
 import com.truedev.application.R;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -53,7 +54,7 @@ public class CapturedImagesAdapter extends BaseAdapter implements View.OnClickLi
         }
     }
 
-    public class ImagesHolder {
+    public class ImagesHolder implements Serializable{
 
         ImageView ivRemoveImage;
         ImageView capturedImage;
