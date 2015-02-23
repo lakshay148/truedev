@@ -21,6 +21,7 @@ public class Constants {
     public static final String ANALYTICS = "Analytics";
     public static final String LISTVIEWS = "ListViews";
     public static final String CAMERA_ITEMS = "Camera";
+    public static final String MAP_TYPE = "mapType";
     public static String NAVIGATION_DRAWER = "Navigation Drawers";
     public static String NOTIFICATIONS = "Notifications";
 

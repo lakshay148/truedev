@@ -94,6 +94,7 @@ public class CameraActivity extends Activity implements View.OnClickListener,Cam
         }
     }
 
+    //updates the listview with the photos clicked by the camera
     private void updateCapturedPhotos(File pictureFile) {
         ImageInfo imageInfo = new ImageInfo(pictureFile.getAbsolutePath());
 //        imagesList.add(imageInfo);

@@ -16,6 +16,7 @@ import android.widget.GridView;
 import com.truedev.application.Adapters.PhotosGridAdapter;
 import com.truedev.application.CameraActivity;
 import com.truedev.application.CameraPreview;
+import com.truedev.application.GalleryActivity;
 import com.truedev.application.ImageInfo;
 import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
@@ -76,6 +77,8 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
                 break;
 
             case R.id.bFromGallery:
+                Intent intent1 = new Intent(getActivity(), GalleryActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

@@ -45,7 +45,7 @@ public class CapturedImagesAdapter extends BaseAdapter implements View.OnClickLi
         switch (v.getId())
         {
             case R.id.ivRemoveImage:
-                Log.e("On Click Remove Position",position+"");
+                Log.e("On Click Remove",position+"");
                 File file = new File(imageInfoArrayList.get(position).getImagePath());
                 file.delete();
                 imageInfoArrayList.remove(position);
@@ -95,7 +95,7 @@ public class CapturedImagesAdapter extends BaseAdapter implements View.OnClickLi
         holder.ivRemoveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("On Click Remove Position",position+"");
+                Log.e("On Click Remove",position+"");
                 File file = new File(imageInfoArrayList.get(position).getImagePath());
                 file.delete();
                 imageInfoArrayList.remove(position);
