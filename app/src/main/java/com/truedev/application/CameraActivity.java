@@ -36,7 +36,7 @@ public class CameraActivity extends Activity implements View.OnClickListener,Cam
     private Camera camera;
     private ImageView capturedImageView;
     private LinearLayout llCapturedImages;
-    private ArrayList<ImageInfo> imagesList = new ArrayList<ImageInfo>();
+    private ArrayList<FileInfo> imagesList = new ArrayList<FileInfo>();
     private CapturedImagesAdapter imagesAdapter;
     private ListView lvCaptureImages;
 
@@ -96,9 +96,10 @@ public class CameraActivity extends Activity implements View.OnClickListener,Cam
 
     //updates the listview with the photos clicked by the camera
     private void updateCapturedPhotos(File pictureFile) {
-        ImageInfo imageInfo = new ImageInfo(pictureFile.getAbsolutePath());
+        FileInfo fileInfo = new FileInfo();
+        fileInfo.setFilePath(pictureFile.getAbsolutePath());
 //        imagesList.add(imageInfo);
-        imagesAdapter.getImageInfoArrayList().add(imageInfo);
+        imagesAdapter.getImageInfoArrayList().add(fileInfo);
         imagesAdapter.notifyDataSetChanged();
         lvCaptureImages.smoothScrollToPosition(imagesAdapter.getCount()-1);
         camera.startPreview();
@@ -106,6 +107,7 @@ public class CameraActivity extends Activity implements View.OnClickListener,Cam
 
     @Override
     public void onPictureTaken(byte[] data, Camera camera) {
+
         File pictureFile = Constants.getMediaOutputFile(Constants.TYPE_IMAGE);
         Log.d(TAG, pictureFile.getAbsolutePath().toString() + "");
         if (pictureFile == null) {

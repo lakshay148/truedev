@@ -2,39 +2,31 @@ package com.truedev.application.Fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import com.truedev.application.Adapters.PhotosGridAdapter;
 import com.truedev.application.CameraActivity;
-import com.truedev.application.CameraPreview;
+import com.truedev.application.FileInfo;
 import com.truedev.application.GalleryActivity;
-import com.truedev.application.ImageInfo;
 import com.truedev.application.R;
-import com.truedev.application.Utils.Constants;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by Lakshay on 13-02-2015.
  */
-public class CameraItemsFragment extends Fragment implements View.OnClickListener{
+public class CameraItemsFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "CameraFragment";
     private static final int CODE_CAMERA = 148;
-    ArrayList<ImageInfo> imageInfos = new ArrayList<ImageInfo>();
+    private static final int CODE_GALLERY = 256;
+    ArrayList<FileInfo> allFileInfos = new ArrayList<FileInfo>();
     GridView gvPhotos;
     PhotosGridAdapter photosGridAdapter;
 
@@ -44,7 +36,7 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
         rootView.findViewById(R.id.bTakePhoto).setOnClickListener(this);
         rootView.findViewById(R.id.bFromGallery).setOnClickListener(this);
         gvPhotos = (GridView) rootView.findViewById(R.id.gvPhotos);
-        photosGridAdapter = new PhotosGridAdapter(getActivity(),imageInfos);
+        photosGridAdapter = new PhotosGridAdapter(getActivity(),allFileInfos);
         gvPhotos.setAdapter(photosGridAdapter);
         return rootView;
     }
@@ -58,8 +50,19 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
                 if(data!=null)
                 {
                     Log.e("data Activity Result","Not null");
-                    ArrayList<ImageInfo> list = (ArrayList<ImageInfo>) data.getSerializableExtra(CameraActivity.CAMERA_IMAGES);
-                    imageInfos.addAll(list);
+                    ArrayList<FileInfo> list = (ArrayList<FileInfo>) data.getSerializableExtra(CameraActivity.CAMERA_IMAGES);
+                    allFileInfos.addAll(list);
+                    Log.e(TAG, list.toString());
+                    photosGridAdapter.notifyDataSetChanged();
+                }
+                break;
+
+            case CODE_GALLERY:
+                if(data != null)
+                {
+                    Log.e("data Activity Result","Not null");
+                    ArrayList<FileInfo> list = (ArrayList<FileInfo>) data.getSerializableExtra(GalleryActivity.GALLERY_SELECTED_PHOTOS);
+                    allFileInfos.addAll(list);
                     Log.e(TAG, list.toString());
                     photosGridAdapter.notifyDataSetChanged();
                 }
@@ -78,7 +81,7 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
 
             case R.id.bFromGallery:
                 Intent intent1 = new Intent(getActivity(), GalleryActivity.class);
-                startActivity(intent1);
+                startActivityForResult(intent1, CODE_GALLERY);
                 break;
         }
     }

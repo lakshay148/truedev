@@ -38,17 +38,17 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
 
         // Parse push notification test starts here
-        Parse.initialize(this, "mKNrAWX6jpWUZSdL9Jl5XtQt4fu0HqdYe7x48y4M", "Fsp1iVLgnfI2v2vzHo8raSPwyvr6MKGb3GWVzq6C");
-        ParsePush.subscribeInBackground("", new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
-                } else {
-                    Log.e("com.parse.push", "failed to subscribe for push", e);
-                }
-            }
-        });
+//        Parse.initialize(this, "mKNrAWX6jpWUZSdL9Jl5XtQt4fu0HqdYe7x48y4M", "Fsp1iVLgnfI2v2vzHo8raSPwyvr6MKGb3GWVzq6C");
+//        ParsePush.subscribeInBackground("", new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
+//                } else {
+//                    Log.e("com.parse.push", "failed to subscribe for push", e);
+//                }
+//            }
+//        });
         // Parse push notification test ends here
 //        throw new RuntimeException("Crashssss");
     }
@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.e("Clicked Position" , ""+position);
-        Toast.makeText(getApplicationContext(),"Clicked :"+Constants.allItems[position],Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),"Clicked :"+Constants.allItems[position],Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,ItemActivity.class);
         intent.putExtra(Constants.OPEN_FRAGMENT,Constants.allItems[position]);
         startActivity(intent);

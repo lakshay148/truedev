@@ -9,8 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.cache.DiskCache;
-import com.truedev.application.ImageInfo;
+import com.truedev.application.FileInfo;
 import com.truedev.application.R;
 
 import java.util.ArrayList;
@@ -21,22 +20,22 @@ import java.util.ArrayList;
 public class PhotosGridAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<ImageInfo> imageInfos;
+    private ArrayList<FileInfo> fileInfos;
 
-    public PhotosGridAdapter(Context context,ArrayList<ImageInfo> imageInfos) {
+    public PhotosGridAdapter(Context context,ArrayList<FileInfo> fileInfos) {
 
         this.context = context;
-        this.imageInfos = imageInfos;
+        this.fileInfos = fileInfos;
     }
 
     @Override
     public int getCount() {
-        return imageInfos.size();
+        return fileInfos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return imageInfos.get(position);
+        return fileInfos.get(position);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class PhotosGridAdapter extends BaseAdapter {
         {
             holder = (PhotosHolder) convertView.getTag();
         }
-        Glide.with(context).load(imageInfos.get(position).getImagePath())
+        Glide.with(context).load(fileInfos.get(position).getFilePath())
                 .crossFade()
                 .placeholder(R.drawable.image_load_default_small)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

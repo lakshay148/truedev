@@ -1,6 +1,7 @@
 package com.truedev.application;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,14 +17,18 @@ import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.truedev.application.Fragment.AnalyticsFragment;
 import com.truedev.application.Fragment.CameraItemsFragment;
 import com.truedev.application.Fragment.MapsFragment;
+import com.truedev.application.Interfaces.PhotosListener;
 import com.truedev.application.Utils.Constants;
 
 import static com.truedev.application.Utils.Constants.OPEN_FRAGMENT;
 import com.facebook.Session;
 
-public class ItemActivity extends Activity implements CameraHostProvider{
+import java.util.ArrayList;
+
+public class ItemActivity extends Activity implements CameraHostProvider {
 
     private static final String TAG = "ItemActivity";
+//    private PhotosListener photosListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,17 @@ public class ItemActivity extends Activity implements CameraHostProvider{
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+//        if(resultCode == GalleryActivity.RESULT_OK)
+//        {
+//            ArrayList<FileInfo> fileInfos = (ArrayList<FileInfo>) data.getExtras().get(FolderFiles.SELECTED_FILES);
+//            this.photosListener.updatePhotosFromSource(fileInfos, PhotosListener.SOURCE.GALLERY);
+//        }
+    }
+
     private void initializeFragment(String openFragment) {
 
         switch (openFragment)
@@ -46,8 +62,10 @@ public class ItemActivity extends Activity implements CameraHostProvider{
                 break;
 
             case Constants.CAMERA_ITEMS:
+                CameraItemsFragment cameraItemsFragment = new CameraItemsFragment();
+//                this.photosListener = cameraItemsFragment;
                 getFragmentManager().beginTransaction()
-                        .add(R.id.container, new CameraItemsFragment()).commit();
+                        .add(R.id.container, cameraItemsFragment).commit();
                 break;
 
             case Constants.MAPS:

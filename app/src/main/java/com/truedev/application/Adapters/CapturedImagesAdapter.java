@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.truedev.application.FileInfo;
 import com.truedev.application.ImageInfo;
 import com.truedev.application.R;
 
@@ -23,17 +24,17 @@ import java.util.ArrayList;
 
 public class CapturedImagesAdapter extends BaseAdapter implements View.OnClickListener {
     Context mContext;
-    ArrayList<ImageInfo> imageInfoArrayList;
+    ArrayList<FileInfo> imageInfoArrayList;
 
-    public ArrayList<ImageInfo> getImageInfoArrayList() {
+    public ArrayList<FileInfo> getImageInfoArrayList() {
         return imageInfoArrayList;
     }
 
-    public void setImageInfoArrayList(ArrayList<ImageInfo> imageInfoArrayList) {
+    public void setImageInfoArrayList(ArrayList<FileInfo> imageInfoArrayList) {
         this.imageInfoArrayList = imageInfoArrayList;
     }
 
-    public CapturedImagesAdapter(Context context, ArrayList<ImageInfo> list) {
+    public CapturedImagesAdapter(Context context, ArrayList<FileInfo> list) {
         this.mContext = context;
         imageInfoArrayList = list;
     }
@@ -46,7 +47,7 @@ public class CapturedImagesAdapter extends BaseAdapter implements View.OnClickLi
         {
             case R.id.ivRemoveImage:
                 Log.e("On Click Remove",position+"");
-                File file = new File(imageInfoArrayList.get(position).getImagePath());
+                File file = new File(imageInfoArrayList.get(position).getFilePath());
                 file.delete();
                 imageInfoArrayList.remove(position);
                 notifyDataSetChanged();
@@ -72,7 +73,7 @@ public class CapturedImagesAdapter extends BaseAdapter implements View.OnClickLi
 
     @Override
     public long getItemId(int position) {
-        return imageInfoArrayList.get(position).getId();
+        return 0;
     }
 
     @Override
@@ -96,14 +97,14 @@ public class CapturedImagesAdapter extends BaseAdapter implements View.OnClickLi
             @Override
             public void onClick(View v) {
                 Log.e("On Click Remove",position+"");
-                File file = new File(imageInfoArrayList.get(position).getImagePath());
+                File file = new File(imageInfoArrayList.get(position).getFilePath());
                 file.delete();
                 imageInfoArrayList.remove(position);
                 notifyDataSetChanged();
             }
         });
 
-        Glide.with(mContext).load("file://" + imageInfoArrayList.get(position).getImagePath())
+        Glide.with(mContext).load("file://" + imageInfoArrayList.get(position).getFilePath())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade()
                 .placeholder(R.drawable.image_load_default_small)
