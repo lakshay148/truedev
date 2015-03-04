@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TrueDev.iml" filepath="$PROJECT_DIR$/TrueDev.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dynamicgrid/dynamicgrid.iml" filepath="$PROJECT_DIR$/dynamicgrid/dynamicgrid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/truedev.iml" filepath="$PROJECT_DIR$/truedev.iml" />
     </modules>
   </component>
 </project>
