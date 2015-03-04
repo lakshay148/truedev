@@ -45,10 +45,13 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e(TAG , "On Activity Rresult");
+        Log.e(TAG, "On Activity Rresult");
         if(resultCode == FolderFiles.RESULT_SKIP_FOLDERS)
         {
+            Log.e(TAG, "Skip Folders");
             Intent intent = new Intent();
+            ArrayList<FileInfo> fileInfos = (ArrayList<FileInfo>) data.getExtras().getSerializable(FolderFiles.SELECTED_FILES);
+            Log.e(TAG, "FileInfos Size " + fileInfos.size());
             intent.putExtra(GALLERY_SELECTED_PHOTOS , data.getExtras().getSerializable(FolderFiles.SELECTED_FILES));
             setResult(RESULT_OK, intent);
             finish();

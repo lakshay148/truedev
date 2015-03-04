@@ -17,7 +17,6 @@ import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.truedev.application.Fragment.AnalyticsFragment;
 import com.truedev.application.Fragment.CameraItemsFragment;
 import com.truedev.application.Fragment.MapsFragment;
-import com.truedev.application.Interfaces.PhotosListener;
 import com.truedev.application.Utils.Constants;
 
 import static com.truedev.application.Utils.Constants.OPEN_FRAGMENT;

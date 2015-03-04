@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.truedev.application.Adapters.PhotosGridAdapter;
@@ -16,18 +17,20 @@ import com.truedev.application.FileInfo;
 import com.truedev.application.GalleryActivity;
 import com.truedev.application.R;
 
+import org.askerov.dynamicgrid.DynamicGridView;
+
 import java.util.ArrayList;
 
 /**
  * Created by Lakshay on 13-02-2015.
  */
-public class CameraItemsFragment extends Fragment implements View.OnClickListener {
+public class CameraItemsFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemLongClickListener {
 
     private static final String TAG = "CameraFragment";
     private static final int CODE_CAMERA = 148;
     private static final int CODE_GALLERY = 256;
     ArrayList<FileInfo> allFileInfos = new ArrayList<FileInfo>();
-    GridView gvPhotos;
+    DynamicGridView gvPhotos;
     PhotosGridAdapter photosGridAdapter;
 
     @Override
@@ -35,9 +38,28 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
         View rootView = inflater.inflate(R.layout.camera_fragment,container,false);
         rootView.findViewById(R.id.bTakePhoto).setOnClickListener(this);
         rootView.findViewById(R.id.bFromGallery).setOnClickListener(this);
-        gvPhotos = (GridView) rootView.findViewById(R.id.gvPhotos);
-        photosGridAdapter = new PhotosGridAdapter(getActivity(),allFileInfos);
+        gvPhotos = (DynamicGridView) rootView.findViewById(R.id.gvPhotos);
+        photosGridAdapter = new PhotosGridAdapter(getActivity(),allFileInfos,2);
         gvPhotos.setAdapter(photosGridAdapter);
+//        gvPhotos.setEditModeEnabled(true);
+        gvPhotos.setOnItemLongClickListener(this);
+        gvPhotos.setOnDropListener(new DynamicGridView.OnDropListener() {
+            @Override
+            public void onActionDrop() {
+                gvPhotos.stopEditMode();
+            }
+        });
+        gvPhotos.setOnDragListener(new DynamicGridView.OnDragListener() {
+            @Override
+            public void onDragStarted(int position) {
+
+            }
+
+            @Override
+            public void onDragPositionsChanged(int oldPosition, int newPosition) {
+
+            }
+        });
         return rootView;
     }
 
@@ -64,6 +86,7 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
                     ArrayList<FileInfo> list = (ArrayList<FileInfo>) data.getSerializableExtra(GalleryActivity.GALLERY_SELECTED_PHOTOS);
                     allFileInfos.addAll(list);
                     Log.e(TAG, list.toString());
+                    photosGridAdapter.add(list);
                     photosGridAdapter.notifyDataSetChanged();
                 }
                 break;
@@ -84,6 +107,12 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
                 startActivityForResult(intent1, CODE_GALLERY);
                 break;
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        gvPhotos.startEditMode(position);
+        return true;
     }
 }
 

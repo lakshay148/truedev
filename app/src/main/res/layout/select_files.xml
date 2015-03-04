@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="200dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="150dp"
     android:id="@+id/rlSelectFiles"
-    android:layout_height="200dp">
+    android:layout_height="150dp">
 
     <View
         android:id="@+id/vTransparentLayer"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@color/tranparent_black"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/imageSelected"
+        android:src="@drawable/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -24,4 +25,4 @@
 
 
 
-</FrameLayout>
+</RelativeLayout>

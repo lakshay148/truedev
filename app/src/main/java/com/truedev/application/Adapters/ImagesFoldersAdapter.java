@@ -75,11 +75,10 @@ public class ImagesFoldersAdapter extends BaseAdapter {
         }
         holder.FolderName.setText(folders.get(position).getDisplayName().toString());
 
-        Log.e("File Path in Adapter : ", folders.get(position).getFilePath());
         Glide.with(context)
                 .load("file://"+folders.get(position).getFilePath())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.image_load_default_big)
+                .placeholder(R.drawable.background_image)
                 .into(holder.imageView);
 
         return convertView;

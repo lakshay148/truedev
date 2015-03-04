@@ -105,8 +105,9 @@ public class SelectFilesAdapter extends BaseAdapter implements View.OnClickListe
         convertView.setOnClickListener(this);
         filesHolder.transparentLayer.setTag(position);
         Glide.with(context).load(fileInfo.getFilePath())
-                .placeholder(R.drawable.image_load_default_big)
-                .fitCenter()
+                .placeholder(R.drawable.background_image)
+//                .placeholder(R.drawable.image_load_default_big)
+                .centerCrop()
                 .into(filesHolder.selectedImage);
 
         Log.e(TAG, fileInfo.getDisplayName());

@@ -60,6 +60,7 @@ public class FolderFiles extends ActionBarActivity implements View.OnClickListen
         {
             case R.id.bDone:
                 Intent intent = new Intent();
+                Log.e(TAG, "Selected Files Size : "+selectedFiles.size());
                 intent.putExtra(SELECTED_FILES, selectedFiles);
                 setResult(RESULT_SKIP_FOLDERS, intent);
                 finish();
