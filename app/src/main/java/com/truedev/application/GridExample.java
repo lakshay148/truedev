@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.truedev.application.Adapters.GridAdapter;
+
 import org.askerov.dynamicgrid.DynamicGridView;
 
 import java.util.ArrayList;

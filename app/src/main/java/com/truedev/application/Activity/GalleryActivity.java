@@ -1,4 +1,4 @@
-package com.truedev.application;
+package com.truedev.application.Activity;
 
 import android.content.Intent;
 import android.os.Environment;
@@ -12,6 +12,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.truedev.application.Adapters.ImagesFoldersAdapter;
+import com.truedev.application.ApplicationController;
+import com.truedev.application.FileInfo;
+import com.truedev.application.Fragment.CameraItemsFragment;
+import com.truedev.application.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,8 +28,10 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
     public static final String FOLDER_NAME = "folder_name";
     private static final int REQUEST_FOLDER_FILES = 100;
     public static final String GALLERY_SELECTED_PHOTOS = "galleryPhotos";
+    public static final String ALREADY_SELECTED_FILES = "alreadySelectedFiles";
     private ArrayList<FileInfo> folders = new ArrayList<FileInfo>();
     ImagesFoldersAdapter adapter;
+    ArrayList<FileInfo> alreadySelectedFiles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
         setContentView(R.layout.activity_gallery);
 
         GridView gvFolders = (GridView) findViewById(R.id.gvFolders);
+//        alreadySelectedFiles = (ArrayList<FileInfo>) getIntent().getSerializableExtra(CameraItemsFragment.CAMERA_ITEMS_SELECTED_FILES);
         adapter = new ImagesFoldersAdapter(this, folders);
         gvFolders.setAdapter(adapter);
 
@@ -50,9 +57,9 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
         {
             Log.e(TAG, "Skip Folders");
             Intent intent = new Intent();
-            ArrayList<FileInfo> fileInfos = (ArrayList<FileInfo>) data.getExtras().getSerializable(FolderFiles.SELECTED_FILES);
-            Log.e(TAG, "FileInfos Size " + fileInfos.size());
-            intent.putExtra(GALLERY_SELECTED_PHOTOS , data.getExtras().getSerializable(FolderFiles.SELECTED_FILES));
+//            ArrayList<FileInfo> fileInfos = (ArrayList<FileInfo>) data.getExtras().getSerializable(FolderFiles.SELECTED_FILES);
+//            Log.e(TAG, "FileInfos Size " + fileInfos.size());
+//            intent.putExtra(GALLERY_SELECTED_PHOTOS , data.getExtras().getSerializable(FolderFiles.SELECTED_FILES));
             setResult(RESULT_OK, intent);
             finish();
         }
@@ -82,15 +89,15 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("Position Clicked", position + "");
-
+        Log.e(TAG ,"On Item Click " +  position + "");
         FileInfo fileInfo = folders.get(position);
         File file = new File(fileInfo.getFileName());
-        Log.e("File path to open", fileInfo.getFileName());
+        Log.e(TAG ,"File path to open" + fileInfo.getFileName());
         ArrayList<FileInfo> filesInFolder = getFilesInFolder(file);
         Intent intent = new Intent(this,FolderFiles.class);
         intent.putExtra(FOLDER_NAME, fileInfo.getDisplayName());
         intent.putExtra(FILES_IN_FOLDER, filesInFolder);
+//        intent.putExtra(ALREADY_SELECTED_FILES , alreadySelectedFiles);
         startActivityForResult(intent, REQUEST_FOLDER_FILES);
     }
 
@@ -98,8 +105,12 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
     private ArrayList<FileInfo> getFolders() {
         File pathPictures = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         Log.e(TAG, "External Path :" + pathPictures.toString());
-        ArrayList<FileInfo> files = getAllFoldersInfo(pathPictures);
-        return files;
+        ArrayList<FileInfo> files1 = getAllFoldersInfo(pathPictures);
+
+        File pathDCIM = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        ArrayList<FileInfo> files2 = getAllFoldersInfo(pathDCIM);
+        files1.addAll(files2);
+        return files1;
     }
 
     private ArrayList<FileInfo> getAllFoldersInfo(File file) {
@@ -117,17 +128,20 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
                 fileInfo.setDisplayName(folder.getName());
                 fileInfo.setFileName(folder.getAbsolutePath());
                 File[] imagesInFolder = folder.listFiles();
-                if (imagesInFolder.length == 0) {
-                    Log.e("File Type ", "Image");
-                    fileInfo.setFilePath(folder.getAbsolutePath());
-                } else {
-                    Log.e("File Type ", "Folder");
-                    fileInfo.setType(FileInfo.FILE_TYPE.FOLDER);
-                    fileInfo.setFileCount(imagesInFolder.length);
-                    fileInfo.setFilePath(imagesInFolder[imagesInFolder.length - 1].getAbsolutePath());
-                    Log.e("Last File Path", imagesInFolder[imagesInFolder.length - 1].getAbsolutePath());
+                if(imagesInFolder!=null)
+                {
+                    if ( imagesInFolder.length == 0) {
+                        Log.e("File Type ", "Image");
+                        fileInfo.setFilePath(folder.getAbsolutePath());
+                    } else {
+                        Log.e("File Type ", "Folder");
+                        fileInfo.setType(FileInfo.FILE_TYPE.FOLDER);
+                        fileInfo.setFileCount(imagesInFolder.length);
+                        fileInfo.setFilePath(imagesInFolder[imagesInFolder.length - 1].getAbsolutePath());
+                        Log.e("Last File Path", imagesInFolder[imagesInFolder.length - 1].getAbsolutePath());
+                    }
+                    allFiles.add(fileInfo);
                 }
-                allFiles.add(fileInfo);
             }
         }
         return allFiles;
@@ -147,9 +161,25 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
                 FileInfo fileInfo = new FileInfo();
                 fileInfo.setDisplayName(individualFile.getName());
                 fileInfo.setFilePath(individualFile.getAbsolutePath());
+
+                if(checkIfAlreadyPresent(fileInfo))
+                    fileInfo.setSelected(true);
                 allFiles.add(fileInfo);
             }
         }
         return allFiles;
+    }
+
+    public boolean checkIfAlreadyPresent(FileInfo fileInfo)
+    {
+        if(ApplicationController.selectedImages.size()>0)
+        {
+            for(FileInfo fileInfo1 : ApplicationController.selectedImages)
+            {
+                if(fileInfo1.getFilePath().equals(fileInfo.getFilePath()))
+                    return true;
+            }
+        }
+        return false;
     }
 }

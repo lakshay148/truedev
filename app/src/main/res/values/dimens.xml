@@ -13,4 +13,6 @@
     <dimen name="grid_column_width">160dp</dimen>
     <dimen name="vertical_space_images">5dp</dimen>
     <dimen name="horizontal_space_images">5dp</dimen>
+    <dimen name="default_button_height">60dp</dimen>
+    <dimen name="defaul_button_width">50dp</dimen>
 </resources>

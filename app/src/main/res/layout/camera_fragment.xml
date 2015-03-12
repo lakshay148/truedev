@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/llActions"
         android:layout_margin="@dimen/default_margin"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -17,9 +18,10 @@
             android:layout_height="match_parent" />
 
         <Button
+            android:layout_weight="1"
             android:id="@+id/bFromGallery"
             android:text="Choose From Gallery"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent" />
 
     </LinearLayout>
@@ -36,10 +38,22 @@
 
     <org.askerov.dynamicgrid.DynamicGridView
         android:id="@+id/gvPhotos"
+        android:layout_below="@+id/llActions"
         android:numColumns="2"
+        android:verticalSpacing="@dimen/vertical_space_images"
+        android:horizontalSpacing="@dimen/horizontal_space_images"
         android:layout_width="match_parent"
+        android:layout_above="@+id/bUploadPhotos"
+        android:layout_margin="@dimen/default_margin"
         android:layout_height="wrap_content">
 
         </org.askerov.dynamicgrid.DynamicGridView>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/bUploadPhotos"
+        android:layout_alignParentBottom="true"
+        android:text="Upload"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_button_height" />
+
+</RelativeLayout>

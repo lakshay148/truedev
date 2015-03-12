@@ -1,4 +1,4 @@
-package com.truedev.application;
+package com.truedev.application.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.truedev.application.R;
 
 import org.askerov.dynamicgrid.BaseDynamicGridAdapter;
 
@@ -19,7 +21,7 @@ public class GridAdapter extends BaseDynamicGridAdapter{
     private Context context;
     ArrayList<String> names;
 
-    protected GridAdapter(Context context,ArrayList<String> values, int columnCount) {
+    public GridAdapter(Context context,ArrayList<String> values, int columnCount) {
         super(context,values, columnCount);
         this.context = context;
         this.names = values;

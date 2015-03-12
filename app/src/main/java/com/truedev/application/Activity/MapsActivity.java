@@ -1,4 +1,4 @@
-package com.truedev.application;
+package com.truedev.application.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
 
 /**

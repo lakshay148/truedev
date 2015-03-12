@@ -1,4 +1,4 @@
-package com.truedev.application;
+package com.truedev.application.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParsePush;
-import com.parse.SaveCallback;
+import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
 import io.fabric.sdk.android.Fabric;
 

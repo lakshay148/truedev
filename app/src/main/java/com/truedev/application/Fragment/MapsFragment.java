@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.truedev.application.MapsActivity;
+import com.truedev.application.Activity.MapsActivity;
 import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
 

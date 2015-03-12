@@ -1,4 +1,4 @@
-package com.truedev.application;
+package com.truedev.application.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.truedev.application.Fragment.AnalyticsFragment;
 import com.truedev.application.Fragment.CameraItemsFragment;
 import com.truedev.application.Fragment.MapsFragment;
+import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
 
 import static com.truedev.application.Utils.Constants.OPEN_FRAGMENT;

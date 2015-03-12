@@ -1,4 +1,4 @@
-package com.truedev.application;
+package com.truedev.application.Adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.truedev.application.FileInfo;
+import com.truedev.application.Interfaces.UpdateSelection;
+import com.truedev.application.R;
 
 import java.util.ArrayList;
 
@@ -23,10 +26,6 @@ public class SelectFilesAdapter extends BaseAdapter implements View.OnClickListe
     private ArrayList<FileInfo> files;
     private Context context;
     private UpdateSelection updateSelection;
-
-    public interface UpdateSelection{
-        public void updateSelected(FileInfo fileInfo, Boolean selected);
-    }
 
     public SelectFilesAdapter(Context context, ArrayList<FileInfo> files, UpdateSelection updateSelection) {
         this.files = files;
@@ -54,27 +53,32 @@ public class SelectFilesAdapter extends BaseAdapter implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.rlSelectFiles:
-                FilesHolder holder = (FilesHolder) v.getTag();
-                int position = (int) holder.transparentLayer.getTag();
-                FileInfo fileInfo = files.get(position);
-                if(fileInfo.getSelected())
-                {
-                    fileInfo.setSelected(false);
-                    holder.selectedCheckBox.setChecked(false);
-                    holder.transparentLayer.setVisibility(View.INVISIBLE);
-                    this.updateSelection.updateSelected(fileInfo,false);
-                }
-                else
-                {
-                    fileInfo.setSelected(true);
-                    holder.transparentLayer.setVisibility(View.VISIBLE);
-                    holder.selectedImage.setBackgroundColor(context.getResources().getColor(R.color.transparent_white));
-                    holder.selectedCheckBox.setChecked(true);
-                    this.updateSelection.updateSelected(fileInfo,true);
-                }
+                actionSelectUnSelect(v);
                 break;
         }
 
+    }
+
+    private void actionSelectUnSelect(View v) {
+
+        FilesHolder holder = (FilesHolder) v.getTag();
+        int position = (int) holder.transparentLayer.getTag();
+        FileInfo fileInfo = files.get(position);
+        if(fileInfo.getSelected())
+        {
+            fileInfo.setSelected(false);
+            holder.selectedCheckBox.setChecked(false);
+            holder.transparentLayer.setVisibility(View.INVISIBLE);
+            this.updateSelection.updateSelected(fileInfo,false);
+        }
+        else
+        {
+            fileInfo.setSelected(true);
+            holder.transparentLayer.setVisibility(View.VISIBLE);
+            holder.selectedImage.setBackgroundColor(context.getResources().getColor(R.color.transparent_white));
+            holder.selectedCheckBox.setChecked(true);
+            this.updateSelection.updateSelected(fileInfo,true);
+        }
     }
 
     public class FilesHolder

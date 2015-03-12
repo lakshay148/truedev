@@ -1,4 +1,4 @@
-package com.truedev.application;
+package com.truedev.application.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +18,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.truedev.application.Adapters.CapturedImagesAdapter;
+import com.truedev.application.CameraPreview;
+import com.truedev.application.FileInfo;
+import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
 
 import java.io.File;
@@ -62,12 +65,10 @@ public class CameraActivity extends Activity implements View.OnClickListener,Cam
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         findViewById(R.id.button_capture).setOnClickListener(this);
-        Button doneButton = (Button)findViewById(R.id.bDone);
-        doneButton.setOnClickListener(this);
+        findViewById(R.id.bDone).setOnClickListener(this);
         findViewById(R.id.bBack).setOnClickListener(this);
 
         capturedImageView = (ImageView) findViewById(R.id.ivCaptured);
-//        llCapturedImages = (LinearLayout) findViewById(R.id.llCapturedImages);
         lvCaptureImages = (ListView) findViewById(R.id.lvCapturedImages);
         imagesAdapter = new CapturedImagesAdapter(this, imagesList );
         lvCaptureImages.setAdapter(imagesAdapter);

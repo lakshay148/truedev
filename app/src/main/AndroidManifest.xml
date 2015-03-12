@@ -55,7 +55,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -96,12 +96,12 @@
         <!--</receiver>-->
 
         <activity
-            android:name=".ItemActivity"
+            android:name=".Activity.ItemActivity"
             android:label="@string/title_activity_item"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activity.MapsActivity"
             android:label="@string/map_activity_item" >
         </activity>
 
@@ -115,7 +115,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".CameraActivity"
+            android:name=".Activity.CameraActivity"
             android:label="@string/title_activity_item"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -129,12 +129,12 @@
             android:value="AIzaSyBCnuONgR6ASm4J5nWo2eIL5rf84G14a4U" />
 
         <activity
-            android:name=".GalleryActivity"
+            android:name=".Activity.GalleryActivity"
             android:label="@string/title_activity_gallery" >
         </activity>
 
         <activity
-            android:name=".FolderFiles"
+            android:name=".Activity.FolderFiles"
             android:label="@string/title_activity_gallery" >
         </activity>
     </application>
