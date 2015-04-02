@@ -26,6 +26,14 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.bTestSample).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SampleActivity.class);
+                startActivity(intent);
+            }
+        });
+
         ListView listView = (ListView) findViewById(R.id.lvItems);
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, Constants.allItems);
         listView.setAdapter(listAdapter);

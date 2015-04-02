@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="@dimen/image_overlay_height">
+    android:layout_width="match_parent" android:layout_height="@dimen/camera_image_overlay_height">
     <ImageView
         android:id="@+id/ivCaptured"
         android:layout_marginTop="@dimen/camera_view_padding"
@@ -8,7 +8,7 @@
         android:paddingRight="@dimen/camera_view_padding"
         android:background="@drawable/captured_image_background"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/image_overlay_height" />
+        android:layout_height="@dimen/camera_image_overlay_height" />
     <ImageView
         android:id="@+id/ivRemoveImage"
         android:src="@drawable/close_layer"

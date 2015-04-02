@@ -63,37 +63,38 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
-        <!--<service android:name="com.parse.PushService" />-->
+        <!-- <service android:name="com.parse.PushService" /> -->
 
-        <!--<receiver android:name="com.parse.ParseBroadcastReceiver" >-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
-                <!--<action android:name="android.intent.action.USER_PRESENT" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-        <!--<receiver-->
-            <!--android:name="com.parse.ParsePushBroadcastReceiver"-->
-            <!--android:exported="false" >-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.parse.push.intent.RECEIVE" />-->
-                <!--<action android:name="com.parse.push.intent.DELETE" />-->
-                <!--<action android:name="com.parse.push.intent.OPEN" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-        <!--<receiver-->
-            <!--android:name="com.parse.GcmBroadcastReceiver"-->
-            <!--android:permission="com.google.android.c2dm.permission.SEND" >-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
-                <!--<action android:name="com.google.android.c2dm.intent.REGISTRATION" />-->
 
-                <!--&lt;!&ndash; IMPORTANT: Change "com.parse.starter" to match your app's package name. &ndash;&gt;-->
-                <!--<category android:name="com.truedev.application" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
+        <!-- <receiver android:name="com.parse.ParseBroadcastReceiver" > -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+        <!-- <action android:name="android.intent.action.USER_PRESENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <!-- <receiver -->
+        <!-- android:name="com.parse.ParsePushBroadcastReceiver" -->
+        <!-- android:exported="false" > -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.parse.push.intent.RECEIVE" /> -->
+        <!-- <action android:name="com.parse.push.intent.DELETE" /> -->
+        <!-- <action android:name="com.parse.push.intent.OPEN" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <!-- <receiver -->
+        <!-- android:name="com.parse.GcmBroadcastReceiver" -->
+        <!-- android:permission="com.google.android.c2dm.permission.SEND" > -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.android.c2dm.intent.RECEIVE" /> -->
+        <!-- <action android:name="com.google.android.c2dm.intent.REGISTRATION" /> -->
+
+
+        <!-- &lt;!&ndash; IMPORTANT: Change "com.parse.starter" to match your app's package name. &ndash;&gt; -->
+        <!-- <category android:name="com.truedev.application" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
 
         <activity
             android:name=".Activity.ItemActivity"
@@ -101,18 +102,24 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".Activity.SampleActivity"
+            android:label="@string/title_activity_item"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".Activity.MapsActivity"
             android:label="@string/map_activity_item" >
         </activity>
-
         <activity
             android:name=".GridExample"
             android:label="Grid POC" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".Activity.CameraActivity"
@@ -132,10 +139,13 @@
             android:name=".Activity.GalleryActivity"
             android:label="@string/title_activity_gallery" >
         </activity>
-
         <activity
             android:name=".Activity.FolderFiles"
             android:label="@string/title_activity_gallery" >
+        </activity>
+        <activity
+            android:name=".Activity.TestLoaderActivity"
+            android:label="@string/title_activity_test_loader" >
         </activity>
     </application>
 

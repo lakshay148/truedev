@@ -110,6 +110,19 @@ public class GalleryActivity extends ActionBarActivity implements AdapterView.On
         File pathDCIM = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
         ArrayList<FileInfo> files2 = getAllFoldersInfo(pathDCIM);
         files1.addAll(files2);
+
+        File pathWhatsApp = new File(Environment.getExternalStorageDirectory()+"/WhatsApp/Media");
+        Log.e(TAG , pathWhatsApp.getAbsolutePath());
+        ArrayList<FileInfo> files3 = getAllFoldersInfo(pathWhatsApp);
+        for(FileInfo fileInfo : files3)
+        {
+            if(fileInfo.getType().equals(FileInfo.FILE_TYPE.FOLDER))
+            {
+                if(fileInfo.getDisplayName().equals("WhatsApp Images"))
+                    files1.add(fileInfo);
+            }
+        }
+
         return files1;
     }
 

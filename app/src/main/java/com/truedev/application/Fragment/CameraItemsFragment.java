@@ -33,11 +33,6 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
     private static final int CODE_CAMERA = 148;
     private static final int CODE_GALLERY = 256;
     public static final String ADD_PHOTOS = "addPhotos";
-    public static final String REMOVE_PHOTO = "removePhoto";
-    public static final String CAMERA_ITEMS_SELECTED_FILES = "alreadySelectedFiles";
-
-    public ArrayList<FileInfo> allFileInfos = new ArrayList<FileInfo>();
-    public static ArrayList<FileInfo> unSelectedFiles = new ArrayList<FileInfo>();
 
     DynamicGridView gvPhotos;
     PhotosGridAdapter photosGridAdapter;
@@ -91,14 +86,7 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
                 break;
 
             case CODE_GALLERY:
-//                if(data != null)
-//                {
-//                    ArrayList<FileInfo> list = (ArrayList<FileInfo>) data.getSerializableExtra(GalleryActivity.GALLERY_SELECTED_PHOTOS);
-//                    updateGrid(list,ADD_PHOTOS);
-//                }
-
                 Log.e(TAG , "Size of Selected Images : " + ApplicationController.selectedImages.size());
-
                 photosGridAdapter.set(ApplicationController.selectedImages);
                 photosGridAdapter.notifyDataSetChanged();
                 break;
@@ -126,7 +114,6 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
 
             case R.id.bFromGallery:
                 Intent intent1 = new Intent(getActivity(), GalleryActivity.class);
-//                intent1.putExtra(CAMERA_ITEMS_SELECTED_FILES, ApplicationController.selectedImages);
                 startActivityForResult(intent1, CODE_GALLERY);
                 break;
         }
@@ -138,12 +125,6 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
         return true;
     }
 
-//    public void updateAllFiles(FileInfo fileInfo, String action) {
-//        if(action.equals(REMOVE_PHOTO))
-//        {
-//            allFileInfos.remove(fileInfo);
-//        }
-//    }
 
     @Override
     public void updateSelected(FileInfo fileInfo, Boolean selected) {
