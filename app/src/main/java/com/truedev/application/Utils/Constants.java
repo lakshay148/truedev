@@ -22,11 +22,14 @@ public class Constants {
     public static final String LISTVIEWS = "ListViews";
     public static final String CAMERA_ITEMS = "Camera";
     public static final String MAP_TYPE = "mapType";
-    public static String NAVIGATION_DRAWER = "Navigation Drawers";
-    public static String NOTIFICATIONS = "Notifications";
+    public static final String NAVIGATION_DRAWER = "Navigation Drawers";
+    public static final String NOTIFICATIONS = "Notifications";
 
     public static final String MAPS = "Maps";
-    public static String[] allItems = new String[]{ANALYTICS,LISTVIEWS,NAVIGATION_DRAWER,MAPS,NOTIFICATIONS,CAMERA_ITEMS};
+    public static final String TOOL_BAR = "ToolBar";
+
+    public static final String MEDIA_STORE = "mediaStore";
+    public static String[] allItems = new String[]{ANALYTICS,LISTVIEWS,NAVIGATION_DRAWER,MAPS,NOTIFICATIONS,CAMERA_ITEMS,TOOL_BAR,MEDIA_STORE};
 
     public static HashMap<String,String> getItemsFragments()
     {

@@ -24,16 +24,13 @@ public class ImageUploadActivity extends Activity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.camera_fragment);
-
         findViewById(R.id.bTakePhoto).setOnClickListener(this);
         findViewById(R.id.bFromGallery).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-
     }
 
     private void setUpPhotosGrid(View rootView) {

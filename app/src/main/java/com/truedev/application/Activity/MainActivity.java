@@ -26,35 +26,11 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.bTestSample).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SampleActivity.class);
-                startActivity(intent);
-            }
-        });
-
         ListView listView = (ListView) findViewById(R.id.lvItems);
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, Constants.allItems);
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(this);
         listAdapter.notifyDataSetChanged();
-
-
-        // Parse push notification test starts here
-//        Parse.initialize(this, "mKNrAWX6jpWUZSdL9Jl5XtQt4fu0HqdYe7x48y4M", "Fsp1iVLgnfI2v2vzHo8raSPwyvr6MKGb3GWVzq6C");
-//        ParsePush.subscribeInBackground("", new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e == null) {
-//                    Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
-//                } else {
-//                    Log.e("com.parse.push", "failed to subscribe for push", e);
-//                }
-//            }
-//        });
-        // Parse push notification test ends here
-//        throw new RuntimeException("Crashssss");
     }
 
 
@@ -62,7 +38,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return false;
     }
 
     @Override
@@ -76,14 +52,12 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.e("Clicked Position" , ""+position);
-//        Toast.makeText(getApplicationContext(),"Clicked :"+Constants.allItems[position],Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,ItemActivity.class);
         intent.putExtra(Constants.OPEN_FRAGMENT,Constants.allItems[position]);
         startActivity(intent);

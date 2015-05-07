@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.truedev.application.Adapters.PhotosGridAdapter;
 import com.truedev.application.Activity.CameraActivity;
@@ -43,7 +44,7 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
 
         rootView.findViewById(R.id.bTakePhoto).setOnClickListener(this);
         rootView.findViewById(R.id.bFromGallery).setOnClickListener(this);
-
+        rootView.findViewById(R.id.bUploadPhotos).setOnClickListener(this);
         setUpPhotosGrid(rootView);
 
         return rootView;
@@ -115,6 +116,10 @@ public class CameraItemsFragment extends Fragment implements View.OnClickListene
             case R.id.bFromGallery:
                 Intent intent1 = new Intent(getActivity(), GalleryActivity.class);
                 startActivityForResult(intent1, CODE_GALLERY);
+                break;
+
+            case R.id.bUploadPhotos:
+                Toast.makeText(getActivity(),"Make a call to upload selected photos", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

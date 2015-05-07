@@ -16,6 +16,7 @@ import com.commonsware.cwac.camera.CameraHostProvider;
 import com.commonsware.cwac.camera.SimpleCameraHost;
 import com.truedev.application.Fragment.AnalyticsFragment;
 import com.truedev.application.Fragment.CameraItemsFragment;
+import com.truedev.application.Fragment.InfosFragment;
 import com.truedev.application.Fragment.MapsFragment;
 import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
@@ -44,12 +45,6 @@ public class ItemActivity extends Activity implements CameraHostProvider {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-//        if(resultCode == GalleryActivity.RESULT_OK)
-//        {
-//            ArrayList<FileInfo> fileInfos = (ArrayList<FileInfo>) data.getExtras().get(FolderFiles.SELECTED_FILES);
-//            this.photosListener.updatePhotosFromSource(fileInfos, PhotosListener.SOURCE.GALLERY);
-//        }
     }
 
     private void initializeFragment(String openFragment) {
@@ -63,7 +58,6 @@ public class ItemActivity extends Activity implements CameraHostProvider {
 
             case Constants.CAMERA_ITEMS:
                 CameraItemsFragment cameraItemsFragment = new CameraItemsFragment();
-//                this.photosListener = cameraItemsFragment;
                 getFragmentManager().beginTransaction()
                         .add(R.id.container, cameraItemsFragment).commit();
                 break;
@@ -71,6 +65,31 @@ public class ItemActivity extends Activity implements CameraHostProvider {
             case Constants.MAPS:
                 Log.e(TAG,"Maps fragment");
                 getFragmentManager().beginTransaction().add(R.id.container,new MapsFragment()).commit();
+                break;
+
+            case Constants.TOOL_BAR:
+                InfosFragment fragment = InfosFragment.newInstance(Constants.TOOL_BAR);
+                getFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
+                break;
+
+            case Constants.LISTVIEWS:
+                InfosFragment fragment1 = InfosFragment.newInstance(Constants.LISTVIEWS);
+                getFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+                break;
+
+            case Constants.NAVIGATION_DRAWER:
+                InfosFragment fragment2 = InfosFragment.newInstance(Constants.LISTVIEWS);
+                getFragmentManager().beginTransaction().add(R.id.container, fragment2).commit();
+                break;
+
+            case Constants.NOTIFICATIONS:
+                InfosFragment fragment3 = InfosFragment.newInstance(Constants.LISTVIEWS);
+                getFragmentManager().beginTransaction().add(R.id.container, fragment3).commit();
+                break;
+
+            case Constants.MEDIA_STORE:
+                InfosFragment fragment4 = InfosFragment.newInstance(Constants.MEDIA_STORE);
+                getFragmentManager().beginTransaction().add(R.id.container, fragment4).commit();
                 break;
         }
     }
