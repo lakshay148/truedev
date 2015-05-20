@@ -40,10 +40,10 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.facebook.android:facebook-android-sdk:3.21.1'
     compile 'com.github.bumptech.glide:glide:3.5.2'
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.nineoldandroids:library:2.4.0+'
-    compile 'com.google.android.gms:play-services:6.+'
+    compile 'com.google.android.gms:play-services:7.+'
     compile fileTree(include: 'Parse-*.jar', dir: 'libs')
     compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
         transitive = true;
