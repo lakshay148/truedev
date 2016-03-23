@@ -6,13 +6,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.truedev.application.ApplicationController;
 import com.truedev.application.FileInfo;
-import com.truedev.application.Fragment.CameraItemsFragment;
 import com.truedev.application.Interfaces.UpdateSelection;
 import com.truedev.application.R;
 import com.truedev.application.Adapters.SelectFilesAdapter;
