@@ -3,6 +3,7 @@ package com.truedev.application.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.truedev.application.R;
@@ -26,5 +27,16 @@ public class BaseActivity extends AppCompatActivity {
         mContentFrame = (FrameLayout) findViewById(R.id.contentFrame);
 
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
     }
 }

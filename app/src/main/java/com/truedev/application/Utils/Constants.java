@@ -3,6 +3,9 @@ package com.truedev.application.Utils;
 import android.os.Environment;
 import android.util.Log;
 
+import com.truedev.application.Activity.ImageUploadActivity;
+import com.truedev.application.models.HomeItem;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,5 +64,15 @@ public class Constants {
         else
             return null;
         return mediaFile;
+    }
+
+    public static ArrayList<HomeItem> getHomeItems() {
+        ArrayList<HomeItem> items = new ArrayList<>();
+        HomeItem item = new HomeItem();
+        item.setTitle("Image Upload");
+        item.setmAction(HomeItem.ACTION.ACTIVITY);
+        item.setActionClass(ImageUploadActivity.class);
+        items.add(item);
+        return items;
     }
 }

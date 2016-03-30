@@ -11,6 +11,17 @@ public class HomeItem implements Serializable {
 
     private String title;
     private Class<? extends AppCompatActivity> actionClass;
+    private ACTION mAction;
+
+    public enum ACTION{ACTIVITY, SERVICE,FRAGMENT};
+
+    public ACTION getmAction() {
+        return mAction;
+    }
+
+    public void setmAction(ACTION mAction) {
+        this.mAction = mAction;
+    }
 
     public String getTitle() {
         return title;
