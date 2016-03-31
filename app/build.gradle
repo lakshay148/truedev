@@ -55,6 +55,7 @@ dependencies {
     compile project.RECYCLERVIEW
     compile project.CARD_VIEW
     compile project.RETROFIT
+    compile project.OKHTTP_LIBRARY
     compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
         transitive = true;
     }

@@ -84,7 +84,7 @@ public class EvaluatorImageUploadService extends Service {
                 params.put("img_type","2");
                 params.put("file_name","abc_z.jpg");
                 params.put("source","app");
-//                mService.uploadImage();
+                mService.uploadImage("/storage/emulated/0/Pictures/JPEG_20160316_180037_-354678119.jpg",params);
             }
         },2000);
 

@@ -1,7 +1,6 @@
 package com.truedev.application.Service;
 
 import android.app.IntentService;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.util.Log;
 import com.truedev.application.ImageManager.ImageUtils;
 import com.truedev.application.NetworkManager.NetworkManager;
 import com.truedev.application.Utils.CommonUtils;
-import com.truedev.application.Utils.Constants;
 import com.truedev.application.models.GeneralResponse;
 
 import org.json.JSONObject;
@@ -22,24 +20,29 @@ import java.io.EOFException;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.Bind;
-
 /**
  * Created by lakshaygirdhar on 23/3/16.
  */
-public class ImageUploadService extends Service {
+public class ImageUploadService extends IntentService {
 
     private static final String TAG = "ImageUploadService";
     public static String IMAGE_PATH = "imagePath";
     public static String IMAGE_PARAMS = "imageParams";
     private int DESIRED_WIDTH = 1024;
-    public static final int IMAGE_UPLOADED  = 1;
-    public static final int IMAGE_FAILED  = 2;
-    public static final int IMAGE_ERROR  = 3;
+    public static final int IMAGE_UPLOADED = 1;
+    public static final int IMAGE_FAILED = 2;
+    public static final int IMAGE_ERROR = 3;
     private int DESIRED_HEIGHT = 900;
     private HashMap<String, String> params;
     private ImageUploadBinder imageUploadBinder = new ImageUploadBinder();
     private Handler mHandler;
+
+    /**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     */
+    public ImageUploadService() {
+        super("imageuploadservice");
+    }
 
 
     public void setmHandler(Handler mHandler) {
@@ -55,27 +58,27 @@ public class ImageUploadService extends Service {
         this.DESIRED_HEIGHT = DESIRED_HEIGHT;
     }
 
-//    @Override
-//    protected void onHandleIntent(Intent intent) {
-//        if (CommonUtils.isNetWorkAvailable(getBaseContext())) {
-//            Bundle extras = intent.getExtras();
-//            String imagePath = extras.getString(IMAGE_PATH);
-//            params = (HashMap<String, String>) extras.getSerializable(IMAGE_PARAMS);
-//            uploadImage(imagePath,params);
-//        } else {
-//            //// TODO: 22/3/16 Internet not working
-//        }
-//    }
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        if (CommonUtils.isNetWorkAvailable(getBaseContext())) {
+            Bundle extras = intent.getExtras();
+            String imagePath = extras.getString(IMAGE_PATH);
+            params = (HashMap<String, String>) extras.getSerializable(IMAGE_PARAMS);
+            uploadImage(imagePath, params);
+        } else {
+            //// TODO: 22/3/16 Internet not working
+        }
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
         return imageUploadBinder;
     }
 
-    public void uploadImage(String imagePath,HashMap<String,String> params){
-        if(imagePath == null)
-            if(mHandler != null){
-                Message message = Message.obtain(null,IMAGE_ERROR);
+    public void uploadImage(String imagePath, HashMap<String, String> params) {
+        if (imagePath == null)
+            if (mHandler != null) {
+                Message message = Message.obtain(null, IMAGE_ERROR);
                 mHandler.sendMessage(message);
             }
         try {
@@ -85,23 +88,26 @@ public class ImageUploadService extends Service {
         }
     }
 
-    private boolean requestForImageUpload(String imagePath, String params) throws EOFException {
-        GeneralResponse response = NetworkManager.makeImageUploadRequest(ImageUtils.compressImage(imagePath, DESIRED_WIDTH, DESIRED_HEIGHT), params);
-        if (response != null && NetworkManager.SUCCESS.equals(response.getStatus())) {
-            Log.d(TAG, "requestForImageUpload: " + response.getMessage());
-            if(mHandler != null){
-                Message message = Message.obtain(null,IMAGE_UPLOADED,response);
-                mHandler.sendMessage(message);
-            }
-            return true;
-        }
+    private void requestForImageUpload(final String imagePath, final String params) throws EOFException {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GeneralResponse response = NetworkManager.makeImageUploadRequest(ImageUtils.compressImage(imagePath, DESIRED_WIDTH, DESIRED_HEIGHT), params);
+                if (response != null && NetworkManager.SUCCESS.equals(response.getStatus())) {
+                    Log.d(TAG, "requestForImageUpload: " + response.getMessage());
+                    if (mHandler != null) {
+                        Message message = Message.obtain(null, IMAGE_UPLOADED, response);
+                        mHandler.sendMessage(message);
+                    }
+                }
 
-        if(mHandler != null){
-            Message message = Message.obtain(null,IMAGE_FAILED,response);
-            mHandler.sendMessage(message);
-        }
-        Log.d(TAG, "requestForImageUpload: Not Uploaded");
-        return false;
+                if (mHandler != null) {
+                    Message message = Message.obtain(null, IMAGE_FAILED, response);
+                    mHandler.sendMessage(message);
+                }
+                Log.d(TAG, "requestForImageUpload: Not Uploaded");
+            }
+        }).start();
     }
 
     private String createRequest(HashMap<String, String> params) {
@@ -110,15 +116,15 @@ public class ImageUploadService extends Service {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 paramsJson.put(entry.getKey(), entry.getValue());
             }
-            return params.toString();
+            return paramsJson.toString();
         } catch (Exception e) {
             Log.e(TAG, "Exception e : " + e.getStackTrace().toString());
             return null;
         }
     }
 
-    public class ImageUploadBinder extends Binder{
-        public ImageUploadService getService(){
+    public class ImageUploadBinder extends Binder {
+        public ImageUploadService getService() {
             return ImageUploadService.this;
         }
     }
