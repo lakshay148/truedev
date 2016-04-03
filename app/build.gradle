@@ -24,7 +24,7 @@ android {
     defaultConfig {
         applicationId "com.truedev.application"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -48,8 +48,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.5.2'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.parse.bolts:bolts-android:1.+'
-    compile 'com.nineoldandroids:library:2.4.0+'
-    compile 'com.google.android.gms:play-services:7.+'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.google.android.gms:play-services:8.4.0'
     compile fileTree(include: 'Parse-*.jar', dir: 'libs')
     compile project.BUTTERKNIFE
     compile project.RECYCLERVIEW
@@ -60,6 +60,6 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
         transitive = true;
     }
-    compile 'com.commonsware.cwac:camera:0.6.+'
+//    compile 'com.commonsware.cwac:camera:0.6+0'
 }
 

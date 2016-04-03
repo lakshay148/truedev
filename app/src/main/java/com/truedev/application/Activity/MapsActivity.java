@@ -42,7 +42,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_activity);
 
-        mapType = getIntent().getExtras().getString(Constants.MAP_TYPE);
+        if(getIntent().getExtras() == null)
+            mapType = NORMAL;
+        else
+            mapType = getIntent().getExtras().getString(Constants.MAP_TYPE);
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }

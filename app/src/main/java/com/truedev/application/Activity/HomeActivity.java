@@ -9,8 +9,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.truedev.application.Adapters.BaseRecyclerAdapter;
+import com.truedev.application.Adapters.HomeListAdapter;
+import com.truedev.application.Gcm.GcmIntentService;
 import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
+import com.truedev.application.Utils.PrefsUtils;
 import com.truedev.application.models.ListItem;
 
 import java.util.ArrayList;
@@ -37,10 +40,15 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ButterKnife.bind(this, mContentFrame);
 
+        if("".equals(PrefsUtils.getStringSharedPreference(this, GcmIntentService.GCM_ID, ""))){
+            startService(new Intent(this, GcmIntentService.class));
+        }
+
         items = Constants.getHomeItems();
 
         HomeListHolder holder = new HomeListHolder(getHolderView());
-        BaseRecyclerAdapter<ListItem, HomeListHolder> adapter = new BaseRecyclerAdapter<>(this, items, holder, this);
+//        BaseRecyclerAdapter<ListItem, HomeListHolder> adapter = new BaseRecyclerAdapter<>(this, items, holder, this);
+        HomeListAdapter adapter = new HomeListAdapter(items,this);
         rcvItems.setLayoutManager(new LinearLayoutManager(this));
         rcvItems.setHasFixedSize(true);
         rcvItems.setAdapter(adapter);

@@ -93,6 +93,9 @@
 
         <activity android:name=".Activity.MediaStoreTest" />
 
+        <activity android:name=".Activity.NotificationsActivity"
+            android:screenOrientation="portrait" />
+
         <service android:name=".Service.Specific.EvaluatorImageUploadService"/>
         <service android:name=".Service.ImageUploadService" />
 
