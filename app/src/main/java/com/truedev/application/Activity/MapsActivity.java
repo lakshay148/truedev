@@ -2,6 +2,7 @@ package com.truedev.application.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -15,7 +16,7 @@ import com.truedev.application.Utils.Constants;
 /**
  * Created by Lakshay on 20-02-2015.
  */
-public class MapsActivity extends Activity implements OnMapReadyCallback{
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     private static final String TAG = "MapsActivity";
     public static final String TERRAIN = "Terrain";
