@@ -4,7 +4,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.truedev.application.Activity.ImageUploadActivity;
-import com.truedev.application.models.HomeItem;
+import com.truedev.application.models.ListItem;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -73,12 +73,10 @@ public class Constants {
         return mediaFile;
     }
 
-    public static ArrayList<HomeItem> getHomeItems() {
-        ArrayList<HomeItem> items = new ArrayList<>();
-        HomeItem item = new HomeItem();
-        item.setTitle("Image Upload");
-        item.setmAction(HomeItem.ACTION.ACTIVITY);
-        item.setActionClass(ImageUploadActivity.class);
+    public static ArrayList<ListItem> getHomeItems() {
+        ArrayList<ListItem> items = new ArrayList<>();
+        ListItem item = new ListItem("Image Upload",ListItem.ACTION.ACTIVITY,ImageUploadActivity.class);
+
         items.add(item);
         return items;
     }

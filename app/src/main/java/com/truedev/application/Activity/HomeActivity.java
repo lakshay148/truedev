@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.truedev.application.Adapters.BaseRecyclerAdapter;
 import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
-import com.truedev.application.models.HomeItem;
 import com.truedev.application.models.ListItem;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
     @Bind(R.id.rcvItems)
     RecyclerView rcvItems;
 
-    private ArrayList<HomeItem> items;
+    private ArrayList<ListItem> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
         items = Constants.getHomeItems();
 
         HomeListHolder holder = new HomeListHolder(getHolderView());
-        BaseRecyclerAdapter<HomeItem, HomeListHolder> adapter = new BaseRecyclerAdapter<>(this, items, holder, this);
+        BaseRecyclerAdapter<ListItem, HomeListHolder> adapter = new BaseRecyclerAdapter<>(this, items, holder, this);
         rcvItems.setLayoutManager(new LinearLayoutManager(this));
         rcvItems.setHasFixedSize(true);
         rcvItems.setAdapter(adapter);
@@ -61,7 +60,7 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
     private class HomeListHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTitle;
-        private HomeItem mItem;
+        private ListItem mItem;
 
         public HomeListHolder(View itemView) {
             super(itemView);

@@ -2,13 +2,11 @@ package com.truedev.application.Gcm;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
-import com.mml.app.Utils.Constants;
-import com.mml.app.Utils.CustomLog;
-import com.mml.app.Utils.PrefsUtils;
-import com.mml.app.retrofit.RetrofitRequest;
+import com.truedev.application.Utils.PrefsUtils;
 
 import java.io.IOException;
 
@@ -21,6 +19,10 @@ public class GcmIntentService extends IntentService {
      *
      */
 
+    private static final String TAG = "GcmIntentService";
+    private static final String GCM_SENDER_ID = "Your GCM Sender ID Here";
+    public static final String GCM_ID = "gcmId";
+
     public GcmIntentService(){
         super("Gcm Service");
     }
@@ -32,14 +34,16 @@ public class GcmIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         InstanceID instanceID = InstanceID.getInstance(this);
         try {
-            String token = instanceID.getToken(Constants.GCM_SENDER_ID,
+            String token = instanceID.getToken(GCM_SENDER_ID,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
-            CustomLog.e(Constants.TAG, "Token Received "+ token);
-            PrefsUtils.setStringSharedPreference(this, Constants.GCM_ID, token);
-            RetrofitRequest.sendGcmToken(token);
+            Log.e(TAG, "Token Received " + token);
+            PrefsUtils.setStringSharedPreference(this, GCM_ID, token);
+
+            //Send Gcm Token
+//            RetrofitRequest.sendGcmToken(token);
         } catch (IOException e) {
-            CustomLog.e(Constants.TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage());
         }
     }
 }
