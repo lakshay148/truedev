@@ -4,6 +4,8 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.truedev.application.Activity.ImageUploadActivity;
+import com.truedev.application.Activity.MapsActivity;
+import com.truedev.application.models.HomeItem;
 import com.truedev.application.models.ListItem;
 
 import java.io.File;
@@ -78,6 +80,18 @@ public class Constants {
         ListItem item = new ListItem("Image Upload",ListItem.ACTION.ACTIVITY,ImageUploadActivity.class);
 
         items.add(item);
+
+        HomeItem item1 = new HomeItem();
+        item1.setTitle("Google Maps");
+        item1.setmAction(HomeItem.ACTION.ACTIVITY);
+        item1.setActionClass(MapsActivity.class);
+        items.add(item1);
+
+        HomeItem item2 = new HomeItem();
+        item2.setTitle("Google Maps");
+        item2.setmAction(HomeItem.ACTION.ACTIVITY);
+        item2.setActionClass(MapsActivity.class);
+        items.add(item2);
         return items;
     }
 }
