@@ -1,5 +1,6 @@
 package com.truedev.application.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.truedev.application.Adapters.BaseRecyclerAdapter;
 import com.truedev.application.R;
+import com.truedev.application.Utils.Constants;
+import com.truedev.application.models.HomeItem;
 import com.truedev.application.models.ListItem;
 
 import java.util.ArrayList;
@@ -25,26 +28,27 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
     @Bind(R.id.rcvItems)
     RecyclerView rcvItems;
 
-    private ArrayList<ListItem> items;
+    private ArrayList<HomeItem> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_home, mContentFrame);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ButterKnife.bind(this, mContentFrame);
 
-        items = new ArrayList<>();
-        ListItem item = new ListItem("Google Maps", ListItem.Action.ACTIVITY,MapsActivity.class);
-        items.add(item);
-        HomeListHolder holder = new HomeListHolder(getHolderView());
-        BaseRecyclerAdapter<ListItem,HomeListHolder> adapter = new BaseRecyclerAdapter<>(this,items,holder,this);
-        rcvItems.setLayoutManager(new LinearLayoutManager(this));
-        rcvItems.setAdapter(adapter);
+        items = Constants.getHomeItems();
 
+        HomeListHolder holder = new HomeListHolder(getHolderView());
+        BaseRecyclerAdapter<HomeItem, HomeListHolder> adapter = new BaseRecyclerAdapter<>(this, items, holder, this);
+        rcvItems.setLayoutManager(new LinearLayoutManager(this));
+        rcvItems.setHasFixedSize(true);
+        rcvItems.setAdapter(adapter);
     }
 
     private View getHolderView() {
-        return LayoutInflater.from(this).inflate(R.layout.home_item,null);
+        return LayoutInflater.from(this).inflate(R.layout.home_item, null);
     }
 
     @Override
@@ -54,20 +58,23 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
         holder1.mItem = items.get(position);
     }
 
-    private class HomeListHolder extends RecyclerView.ViewHolder{
+    private class HomeListHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTitle;
-        private ListItem mItem;
+        private HomeItem mItem;
 
         public HomeListHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
-//            itemView.setOnClickListener(new ActionsListener(HomeActivity.this,mItem));
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    switch (mItem.getmAction()){
+                        case ACTIVITY:
+                            Intent intent = new Intent(HomeActivity.this,mItem.getActionClass());
+                            startActivity(intent);
+                            break;
+                    }
                 }
             });
         }

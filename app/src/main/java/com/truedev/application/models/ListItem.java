@@ -12,6 +12,17 @@ public class ListItem implements Serializable {
     private String title;
     private Action mAction;
     private Class<? extends AppCompatActivity> actionClass;
+    private ACTION mAction;
+
+    public enum ACTION{ACTIVITY, SERVICE,FRAGMENT};
+
+    public ACTION getmAction() {
+        return mAction;
+    }
+
+    public void setmAction(ACTION mAction) {
+        this.mAction = mAction;
+    }
 
     public ListItem(String title, Action mAction, Class<? extends AppCompatActivity> actionClass) {
         this.title = title;

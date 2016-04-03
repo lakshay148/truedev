@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by lakshaygirdhar on 22/3/16.
  */
-public class BaseRecyclerAdapter<S,T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
+public class BaseRecyclerAdapter<S, T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
 
     private Context mContext;
     private ArrayList<S> mObjects;
@@ -17,10 +17,10 @@ public class BaseRecyclerAdapter<S,T extends RecyclerView.ViewHolder> extends Re
     private T mHolder;
 
     public interface BindAdapterListener<T> {
-        public void onBind(T holder,int position);
+        public void onBind(T holder, int position);
     }
 
-    public BaseRecyclerAdapter(Context context,ArrayList<S> objects,T holder,BindAdapterListener listener){
+    public BaseRecyclerAdapter(Context context, ArrayList<S> objects, T holder, BindAdapterListener listener) {
         mContext = context;
         mObjects = objects;
         mHolder = holder;
@@ -35,7 +35,7 @@ public class BaseRecyclerAdapter<S,T extends RecyclerView.ViewHolder> extends Re
 
     @Override
     public void onBindViewHolder(T holder, int position) {
-        mListener.onBind(holder,position);
+        mListener.onBind(holder, position);
     }
 
     @Override

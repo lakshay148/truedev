@@ -62,6 +62,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Activity.ImageUploadActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".Activity.CameraActivity"
             android:label="@string/title_activity_item"
@@ -89,6 +92,9 @@
             android:label="@string/title_activity_tool_bar_test" />
 
         <activity android:name=".Activity.MediaStoreTest" />
+
+        <service android:name=".Service.Specific.EvaluatorImageUploadService"/>
+        <service android:name=".Service.ImageUploadService" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
