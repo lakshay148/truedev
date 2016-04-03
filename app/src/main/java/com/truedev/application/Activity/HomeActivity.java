@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.truedev.application.Adapters.BaseRecyclerAdapter;
 import com.truedev.application.R;
-import com.truedev.application.models.HomeItem;
+import com.truedev.application.models.ListItem;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
     @Bind(R.id.rcvItems)
     RecyclerView rcvItems;
 
-    private ArrayList<HomeItem> items;
+    private ArrayList<ListItem> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +34,10 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
         ButterKnife.bind(this, mContentFrame);
 
         items = new ArrayList<>();
-        HomeItem item = new HomeItem();
-        item.setTitle("Testing base adapter");
+        ListItem item = new ListItem("Google Maps", ListItem.Action.ACTIVITY,MapsActivity.class);
         items.add(item);
         HomeListHolder holder = new HomeListHolder(getHolderView());
-        BaseRecyclerAdapter<HomeItem,HomeListHolder> adapter = new BaseRecyclerAdapter<>(this,items,holder,this);
+        BaseRecyclerAdapter<ListItem,HomeListHolder> adapter = new BaseRecyclerAdapter<>(this,items,holder,this);
         rcvItems.setLayoutManager(new LinearLayoutManager(this));
         rcvItems.setAdapter(adapter);
 
@@ -52,15 +51,25 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
     public void onBind(Object holder, int position) {
         HomeListHolder holder1 = (HomeListHolder) holder;
         holder1.tvTitle.setText(items.get(position).getTitle());
+        holder1.mItem = items.get(position);
     }
 
     private class HomeListHolder extends RecyclerView.ViewHolder{
 
         private TextView tvTitle;
+        private ListItem mItem;
 
         public HomeListHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+//            itemView.setOnClickListener(new ActionsListener(HomeActivity.this,mItem));
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
     }
 }

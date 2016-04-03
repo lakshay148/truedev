@@ -1,21 +1,21 @@
 package com.truedev.application.Gcm;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
-import com.mml.app.Utils.Constants;
-import com.mml.app.Utils.CustomLog;
 
 /**
  * Created by Lakshay on 04/11/15.
  */
 public class GCMListenerService extends GcmListenerService {
 
+    private static final String TAG = "GCMListenerService";
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
         super.onMessageReceived(from, data);
 
-        CustomLog.e(Constants.TAG, "Message Received From : "+ from);
+        Log.e(TAG, "Message Received From : " + from);
     }
 }

@@ -10,7 +10,24 @@ import java.io.Serializable;
 public class ListItem implements Serializable {
 
     private String title;
+    private Action mAction;
     private Class<? extends AppCompatActivity> actionClass;
+
+    public ListItem(String title, Action mAction, Class<? extends AppCompatActivity> actionClass) {
+        this.title = title;
+        this.mAction = mAction;
+        this.actionClass = actionClass;
+    }
+
+    public enum Action{ACTIVITY,SERVICE}
+
+    public Action getmAction() {
+        return mAction;
+    }
+
+    public void setmAction(Action mAction) {
+        this.mAction = mAction;
+    }
 
     public String getTitle() {
         return title;

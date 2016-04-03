@@ -1,7 +1,7 @@
 package com.truedev.application.Activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -13,9 +13,21 @@ import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
 
 /**
+ *  1. Create a google project and get the api key by enabling the credentials
+ *  2. In androidManifest put following metadata
+ *
+
+ <meta-data
+ android:name="com.google.android.maps.v2.API_KEY"
+ android:value="AIzaSyBCnuONgR6ASm4J5nWo2eIL5rf84G14a4U" />
+
+
+ */
+
+/**
  * Created by Lakshay on 20-02-2015.
  */
-public class MapsActivity extends Activity implements OnMapReadyCallback{
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     private static final String TAG = "MapsActivity";
     public static final String TERRAIN = "Terrain";

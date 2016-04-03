@@ -2,11 +2,7 @@ package com.truedev.application.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-
-import com.truedev.application.R;
 
 import java.util.ArrayList;
 
@@ -33,6 +29,7 @@ public class BaseRecyclerAdapter<S,T extends RecyclerView.ViewHolder> extends Re
 
     @Override
     public T onCreateViewHolder(ViewGroup parent, int viewType) {
+
         return mHolder;
     }
 
