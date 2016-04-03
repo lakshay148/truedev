@@ -14,7 +14,6 @@ import android.widget.GridView;
 import com.truedev.application.Adapters.ImagesFoldersAdapter;
 import com.truedev.application.ApplicationController;
 import com.truedev.application.FileInfo;
-import com.truedev.application.Fragment.CameraItemsFragment;
 import com.truedev.application.R;
 
 import java.io.File;

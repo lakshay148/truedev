@@ -16,10 +16,6 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-    <!--
-      IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
-      to match your app's package name + ".permission.C2D_MESSAGE".
-    -->
     <permission
         android:name="com.truedev.application.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -47,6 +43,7 @@
         android:icon="@drawable/truedev"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -55,74 +52,21 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Activity.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:name=".Activity.MapsActivity"
+            android:label="@string/map_activity_item" />
+
+        <activity android:name=".Activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- <service android:name="com.parse.PushService" /> -->
-
-
-        <!-- <receiver android:name="com.parse.ParseBroadcastReceiver" > -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
-        <!-- <action android:name="android.intent.action.USER_PRESENT" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-        <!-- <receiver -->
-        <!-- android:name="com.parse.ParsePushBroadcastReceiver" -->
-        <!-- android:exported="false" > -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="com.parse.push.intent.RECEIVE" /> -->
-        <!-- <action android:name="com.parse.push.intent.DELETE" /> -->
-        <!-- <action android:name="com.parse.push.intent.OPEN" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-        <!-- <receiver -->
-        <!-- android:name="com.parse.GcmBroadcastReceiver" -->
-        <!-- android:permission="com.google.android.c2dm.permission.SEND" > -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="com.google.android.c2dm.intent.RECEIVE" /> -->
-        <!-- <action android:name="com.google.android.c2dm.intent.REGISTRATION" /> -->
-
-
-        <!-- &lt;!&ndash; IMPORTANT: Change "com.parse.starter" to match your app's package name. &ndash;&gt; -->
-        <!-- <category android:name="com.truedev.application" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-
-        <activity
-            android:name=".Activity.ItemActivity"
-            android:label="@string/title_activity_item"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".Activity.SampleActivity"
-            android:label="@string/title_activity_item"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".Activity.MapsActivity"
-            android:label="@string/map_activity_item"></activity>
-        <activity
-            android:name=".GridExample"
-            android:label="Grid POC">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
         <activity
             android:name=".Activity.CameraActivity"
             android:label="@string/title_activity_item"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
         <meta-data
             android:name="com.crashlytics.ApiKey"
@@ -133,21 +77,18 @@
 
         <activity
             android:name=".Activity.GalleryActivity"
-            android:label="@string/title_activity_gallery"></activity>
+            android:label="@string/title_activity_gallery" />
         <activity
             android:name=".Activity.FolderFiles"
-            android:label="@string/title_activity_gallery"></activity>
+            android:label="@string/title_activity_gallery" />
         <activity
             android:name=".Activity.TestLoaderActivity"
-            android:label="@string/title_activity_test_loader"></activity>
+            android:label="@string/title_activity_test_loader" />
         <activity
             android:name=".Activity.ToolBarTestActivity"
-            android:label="@string/title_activity_tool_bar_test"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:label="@string/title_activity_tool_bar_test" />
 
-        <activity
-            android:name=".Activity.MediaStoreTest"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".Activity.MediaStoreTest" />
     </application>
 
 </manifest>
