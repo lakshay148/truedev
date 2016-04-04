@@ -1,5 +1,6 @@
 package com.truedev.application.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
 /**
  * Created by lakshaygirdhar on 22/3/16.
  */
-public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.BindAdapterListener {
+public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.BindAdapterListener<HomeActivity.HomeListHolder> {
 
 
     @Bind(R.id.rcvItems)
@@ -46,44 +47,40 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
 
         items = Constants.getHomeItems();
 
-        HomeListHolder holder = new HomeListHolder(getHolderView());
-//        BaseRecyclerAdapter<ListItem, HomeListHolder> adapter = new BaseRecyclerAdapter<>(this, items, holder, this);
-        HomeListAdapter adapter = new HomeListAdapter(items,this);
+        BaseRecyclerAdapter<ListItem, HomeListHolder> adapter = new BaseRecyclerAdapter<>(this, items, this,HomeListHolder.class,R.layout.home_item);
         rcvItems.setLayoutManager(new LinearLayoutManager(this));
         rcvItems.setHasFixedSize(true);
         rcvItems.setAdapter(adapter);
     }
 
-    private View getHolderView() {
-        return LayoutInflater.from(this).inflate(R.layout.home_item, null);
-    }
-
     @Override
-    public void onBind(Object holder, int position) {
-        HomeListHolder holder1 = (HomeListHolder) holder;
-        holder1.tvTitle.setText(items.get(position).getTitle());
-        holder1.mItem = items.get(position);
+    public void onBind(final HomeListHolder holder, int position) {
+        holder.tvTitle.setText(items.get(position).getTitle());
+        holder.mItem = items.get(position);
+        holder.myView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (holder.mItem.getmAction()) {
+                    case ACTIVITY:
+                            Intent intent = new Intent(HomeActivity.this,holder.mItem.getActionClass());
+                            startActivity(intent);
+                        break;
+                }
+            }
+        });
     }
-
-    private class HomeListHolder extends RecyclerView.ViewHolder {
+//
+    public static class HomeListHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTitle;
         private ListItem mItem;
+        private View myView;
+
 
         public HomeListHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch (mItem.getmAction()){
-                        case ACTIVITY:
-                            Intent intent = new Intent(HomeActivity.this,mItem.getActionClass());
-                            startActivity(intent);
-                            break;
-                    }
-                }
-            });
+            myView = itemView;
         }
     }
 }
