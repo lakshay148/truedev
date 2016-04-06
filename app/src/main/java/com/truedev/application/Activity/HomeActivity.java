@@ -1,5 +1,6 @@
 package com.truedev.application.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by lakshaygirdhar on 22/3/16.
  */
-public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.BindAdapterListener {
+public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.BindAdapterListener<HomeActivity.HomeListHolder> {
 
 
     @Bind(R.id.rcvItems)
@@ -51,10 +52,6 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
         rcvItems.setLayoutManager(new LinearLayoutManager(this));
         rcvItems.setHasFixedSize(true);
         rcvItems.setAdapter(adapter);
-    }
-
-    private View getHolderView() {
-        return LayoutInflater.from(this).inflate(R.layout.home_item, null);
     }
 
     @Override

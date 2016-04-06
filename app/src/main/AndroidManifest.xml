@@ -55,6 +55,9 @@
             android:name=".Activity.MapsActivity"
             android:label="@string/map_activity_item" />
 
+        <activity android:name=".Activity.SampleActivity"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".Activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

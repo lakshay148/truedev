@@ -3,22 +3,16 @@ package com.truedev.application.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Camera;
-import android.hardware.camera2.*;
-
+import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.truedev.application.Adapters.CapturedImagesAdapter;
 import com.truedev.application.CameraPreview;
@@ -52,6 +46,7 @@ public class CameraActivity extends Activity implements View.OnClickListener,Cam
         setContentView(R.layout.camera_items);
 
         try {
+            //NPE here
             CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
             // attempt to get a Camera instance
 //            cameraManager.openCamera("Camera", null , null);
