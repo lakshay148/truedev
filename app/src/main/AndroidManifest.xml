@@ -92,8 +92,13 @@
             android:label="@string/title_activity_tool_bar_test" />
 
         <activity android:name=".Activity.MediaStoreTest" />
+        <activity android:name=".Activity.DateTimeAcitivity"
+            android:screenOrientation="portrait" />
 
         <activity android:name=".Activity.NotificationsActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".Activity.SocialActivity"
             android:screenOrientation="portrait" />
 
         <service android:name=".Service.Specific.EvaluatorImageUploadService"/>

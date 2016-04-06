@@ -3,6 +3,7 @@ package com.truedev.application.Utils;
 import android.os.Environment;
 import android.util.Log;
 
+import com.truedev.application.Activity.DateTimeAcitivity;
 import com.truedev.application.Activity.ImageUploadActivity;
 import com.truedev.application.Activity.MapsActivity;
 import com.truedev.application.Activity.NotificationsActivity;
@@ -82,6 +83,7 @@ public class Constants {
         items.add(new ListItem("Google Maps",ListItem.ACTION.ACTIVITY,MapsActivity.class));
         items.add(new ListItem("Notifications",ListItem.ACTION.ACTIVITY,NotificationsActivity.class));
         items.add(new ListItem("Social", ListItem.ACTION.ACTIVITY,SocialActivity.class));
+        items.add(new ListItem("Date And Time ", ListItem.ACTION.ACTIVITY,DateTimeAcitivity.class));
         return items;
     }
 }

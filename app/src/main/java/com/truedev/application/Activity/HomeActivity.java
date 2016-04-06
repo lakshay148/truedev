@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.truedev.application.Adapters.BaseRecyclerAdapter;
-import com.truedev.application.Adapters.HomeListAdapter;
 import com.truedev.application.Gcm.GcmIntentService;
 import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
@@ -47,8 +46,8 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
         items = Constants.getHomeItems();
 
         HomeListHolder holder = new HomeListHolder(getHolderView());
-//        BaseRecyclerAdapter<ListItem, HomeListHolder> adapter = new BaseRecyclerAdapter<>(this, items, holder, this);
-        HomeListAdapter adapter = new HomeListAdapter(items,this);
+        BaseRecyclerAdapter<ListItem, HomeListHolder> adapter = new BaseRecyclerAdapter<ListItem,HomeListHolder>(this, items, this,HomeListHolder.class, R.layout.home_item);
+//        HomeListAdapter adapter = new HomeListAdapter(items,this);
         rcvItems.setLayoutManager(new LinearLayoutManager(this));
         rcvItems.setHasFixedSize(true);
         rcvItems.setAdapter(adapter);
@@ -60,30 +59,32 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
 
     @Override
     public void onBind(Object holder, int position) {
-        HomeListHolder holder1 = (HomeListHolder) holder;
+        final HomeListHolder holder1 = (HomeListHolder) holder;
         holder1.tvTitle.setText(items.get(position).getTitle());
         holder1.mItem = items.get(position);
+        holder1.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (holder1.mItem.getmAction()) {
+                    case ACTIVITY:
+                        Intent intent = new Intent(HomeActivity.this, holder1.mItem.getActionClass());
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
     }
 
-    private class HomeListHolder extends RecyclerView.ViewHolder {
+    public static class HomeListHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTitle;
         private ListItem mItem;
+        private View mView;
 
         public HomeListHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch (mItem.getmAction()){
-                        case ACTIVITY:
-                            Intent intent = new Intent(HomeActivity.this,mItem.getActionClass());
-                            startActivity(intent);
-                            break;
-                    }
-                }
-            });
+            mView = itemView;
         }
     }
 }
