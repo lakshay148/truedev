@@ -12,4 +12,8 @@
     <string name="title_activity_gallery">GalleryActivity</string>
     <string name="title_activity_test_loader">TestLoaderActivity</string>
     <string name="title_activity_tool_bar_test">ToolBarTestActivity</string>
+    <string name="ok">OK</string>
+    <string name="cancelbutton">Cancel</string>
+    <string name="select_time">Select Time</string>
+    <string name="select_date">Select Date</string>
 </resources>

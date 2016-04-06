@@ -13,6 +13,8 @@ import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
 
 /**
+ * How To Do :
+ *
  *  1. Create a google project and get the api key by enabling the credentials
  *  2. In androidManifest put following metadata
  *
