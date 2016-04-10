@@ -20,7 +20,9 @@ public class GcmIntentService extends IntentService {
      */
 
     private static final String TAG = "GcmIntentService";
-    private static final String GCM_SENDER_ID = "Your GCM Sender ID Here";
+    private static final String GCM_SENDER_ID = "743071846817";
+    //Key to be used at server end
+    private static final String GCM_SERVER_KEY = "AIzaSyArXR-7USU2IiyLBffzSCN07lBBdvGmZjg";
     public static final String GCM_ID = "gcmId";
 
     public GcmIntentService(){

@@ -1,11 +1,9 @@
 package com.truedev.application.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -46,7 +44,7 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
 
         items = Constants.getHomeItems();
 
-        HomeListHolder holder = new HomeListHolder(getHolderView());
+//        HomeListHolder holder = new HomeListHolder(getHolderView());
         BaseRecyclerAdapter<ListItem, HomeListHolder> adapter = new BaseRecyclerAdapter<ListItem,HomeListHolder>(this, items, this,HomeListHolder.class, R.layout.home_item);
 //        HomeListAdapter adapter = new HomeListAdapter(items,this);
         rcvItems.setLayoutManager(new LinearLayoutManager(this));
@@ -55,16 +53,15 @@ public class HomeActivity extends BaseActivity implements BaseRecyclerAdapter.Bi
     }
 
     @Override
-    public void onBind(Object holder, int position) {
-        final HomeListHolder holder1 = (HomeListHolder) holder;
-        holder1.tvTitle.setText(items.get(position).getTitle());
-        holder1.mItem = items.get(position);
-        holder1.mView.setOnClickListener(new View.OnClickListener() {
+    public void onBind(final HomeListHolder holder, int position) {
+        holder.tvTitle.setText(items.get(position).getTitle());
+        holder.mItem = items.get(position);
+        holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (holder1.mItem.getmAction()) {
+                switch (holder.mItem.getmAction()) {
                     case ACTIVITY:
-                        Intent intent = new Intent(HomeActivity.this, holder1.mItem.getActionClass());
+                        Intent intent = new Intent(HomeActivity.this, holder.mItem.getActionClass());
                         startActivity(intent);
                         break;
                 }
