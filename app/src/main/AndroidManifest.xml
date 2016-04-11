@@ -81,22 +81,6 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBCnuONgR6ASm4J5nWo2eIL5rf84G14a4U" />
 
-        <activity
-            android:name=".Activity.GalleryActivity"
-            android:label="@string/title_activity_gallery" />
-        <activity
-            android:name=".Activity.FolderFiles"
-            android:label="@string/title_activity_gallery" />
-        <activity
-            android:name=".Activity.TestLoaderActivity"
-            android:label="@string/title_activity_test_loader" />
-        <activity
-            android:name=".Activity.ToolBarTestActivity"
-            android:label="@string/title_activity_tool_bar_test" />
-
-        <activity android:name=".Activity.MediaStoreTest" />
-        <activity android:name=".Activity.DateTimeAcitivity"
-            android:screenOrientation="portrait" />
 
         <activity android:name=".Activity.NotificationsActivity"
             android:screenOrientation="portrait" />
