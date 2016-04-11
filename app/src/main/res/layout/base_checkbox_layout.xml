@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:layout_margin="@dimen/default_margin"
+        android:id="@+id/tvTitleCheckBoxFragment"
+        style="@style/titleText"
+        android:layout_width="wrap_content"
+        tools:text = "lakshay"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/vLine"
+        android:layout_below="@id/tvTitleCheckBoxFragment"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/vLine"
+        android:layout_margin="@dimen/default_margin"
+        android:id="@+id/rcvCheckBoxItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
