@@ -8,6 +8,7 @@ import com.truedev.application.Activity.ImageUploadActivity;
 import com.truedev.application.Activity.MapsActivity;
 import com.truedev.application.Activity.NotificationsActivity;
 import com.truedev.application.Activity.SocialActivity;
+import com.truedev.application.Activity.SyncAdapterActivity;
 import com.truedev.application.models.ListItem;
 
 import java.io.File;
@@ -84,6 +85,7 @@ public class Constants {
         items.add(new ListItem("Notifications",ListItem.ACTION.ACTIVITY,NotificationsActivity.class));
         items.add(new ListItem("Social", ListItem.ACTION.ACTIVITY,SocialActivity.class));
         items.add(new ListItem("Date And Time ", ListItem.ACTION.ACTIVITY,DateTimeAcitivity.class));
+        items.add(new ListItem("SyncAdapter ", ListItem.ACTION.ACTIVITY,SyncAdapterActivity.class));
         return items;
     }
 }
