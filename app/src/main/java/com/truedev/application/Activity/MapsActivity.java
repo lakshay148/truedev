@@ -16,15 +16,28 @@ import com.truedev.application.Utils.Constants;
  * How To Do :
  *
  *  1. Create a google project and enable the google maps for android api
- *  2. Generate an android key by adding sha-1 of your machine and adding package name com.truedev.application
- *  3. In androidManifest put following metadata with the key generated in the 2nd point
+ *  2. Add Build gradle entry
+
+ compile project.GOOGLE_MAPS
+
+ *  3. Generate an android key by adding sha-1 of your machine and adding package name com.truedev.application
+ *  4. In androidManifest put following metadata with the key generated in the 2nd point
  *
 
  <meta-data
  android:name="com.google.android.maps.v2.API_KEY"
  android:value="AIzaSyBCnuONgR6ASm4J5nWo2eIL5rf84G14a4U" />
 
-    4. Implement onMapReadyCallback wherever needed
+    5. Implement onMapReadyCallback wherever needed
+    6. Add supportmapfragment in layout
+
+ <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:id="@+id/map"
+ tools:context=".MapsActivity"
+ android:name="com.google.android.gms.maps.SupportMapFragment" />
  */
 
 /**
