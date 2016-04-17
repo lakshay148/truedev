@@ -21,6 +21,10 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.truedev.application"
         minSdkVersion 14
@@ -33,13 +37,24 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "ENVIRONMENT", "\"PROD\""
+            buildConfigField "String", "APPLICATION_NAME", "\"Truedev\""
+            buildConfigField "long", "SYNC_FREQUENCY", "24*60*60"
+            resValue("string", "account_type", defaultConfig.applicationId+".staging.account")
+            resValue("string", "content_authority", defaultConfig.applicationId+".staging.SyncAdapter.provider")
+        }
+        debug{
+            buildConfigField "String", "ENVIRONMENT", "\"DEV\""
+            buildConfigField "String", "APPLICATION_NAME", "\"Truedev Debug\""
+            buildConfigField "long", "SYNC_FREQUENCY", "60*60"
+            resValue("string", "account_type", defaultConfig.applicationId+".staging.account")
+            resValue("string", "content_authority", defaultConfig.applicationId+".debug.SyncAdapter.provider")
         }
     }
 
     dexOptions {
         javaMaxHeapSize "4g"
     }
-
 }
 
 dependencies {

@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.truedev.application.Activity.MediaStoreTest;
-import com.truedev.application.Activity.ToolBarTestActivity;
-import com.truedev.application.ImageInfo;
 import com.truedev.application.R;
 import com.truedev.application.Utils.Constants;
 
@@ -54,15 +51,6 @@ public class InfosFragment extends Fragment implements View.OnClickListener{
     private void getImplementation(String fragmentType) {
         switch (fragmentType)
         {
-            case Constants.TOOL_BAR:
-                Intent intent =  new Intent(getActivity(), ToolBarTestActivity.class);
-                startActivity(intent);
-                break;
-
-            case Constants.MEDIA_STORE:
-                Intent intent1 = new Intent(getActivity(), MediaStoreTest.class);
-                startActivity(intent1);
-                break;
             case Constants.NAVIGATION_DRAWER:
             case Constants.NOTIFICATIONS:
             case Constants.LISTVIEWS:

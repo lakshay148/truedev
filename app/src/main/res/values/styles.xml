@@ -42,5 +42,9 @@
             <item name="android:padding">10dp</item>
     </style>
 
+    <style name="titleText">
+
+    </style>
+
     <color name="colorPrimary">#9C27B0</color>
 </resources>
