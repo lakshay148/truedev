@@ -51,6 +51,14 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="212cee0812295a2c1f7ffe324c95efe625a227ea" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA68VrGy5OyHjsvyemBFHp-wJYqx1nlVdw" />
+
         <activity
             android:name=".Activity.MapsActivity"
             android:label="@string/map_activity_item" />
@@ -73,13 +81,6 @@
             android:label="@string/title_activity_item"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-
-        <meta-data
-            android:name="com.crashlytics.ApiKey"
-            android:value="212cee0812295a2c1f7ffe324c95efe625a227ea" />
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBCnuONgR6ASm4J5nWo2eIL5rf84G14a4U" />
 
         <activity
             android:name=".Activity.GalleryActivity"

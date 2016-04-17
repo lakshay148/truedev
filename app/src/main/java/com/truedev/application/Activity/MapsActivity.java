@@ -15,15 +15,16 @@ import com.truedev.application.Utils.Constants;
 /**
  * How To Do :
  *
- *  1. Create a google project and get the api key by enabling the credentials
- *  2. In androidManifest put following metadata
+ *  1. Create a google project and enable the google maps for android api
+ *  2. Generate an android key by adding sha-1 of your machine and adding package name com.truedev.application
+ *  3. In androidManifest put following metadata with the key generated in the 2nd point
  *
 
  <meta-data
  android:name="com.google.android.maps.v2.API_KEY"
  android:value="AIzaSyBCnuONgR6ASm4J5nWo2eIL5rf84G14a4U" />
 
-
+    4. Implement onMapReadyCallback wherever needed
  */
 
 /**
@@ -37,7 +38,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static final String NORMAL = "Normal";
     public static final String NONE = "None";
     public static String[] mapTypes = new String[]{MapsActivity.TERRAIN,MapsActivity.NORMAL,MapsActivity.HYBRID,MapsActivity.NONE};
-    String mapType;
+    private String mapType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
