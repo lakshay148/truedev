@@ -60,9 +60,9 @@ android {
 dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.github.bumptech.glide:glide:3.5.2'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.nineoldandroids:library:2.4.0'
+    compile project.GLIDE
+    compile project.SUPPORT_LIBRARY
+    compile project.NINE_OLD_ANDROID
     compile fileTree(include: 'Parse-*.jar', dir: 'libs')
     compile project.GOOGLE_MAPS
     compile project.GOOGLE_CLOUD_MESSAGING
@@ -72,6 +72,7 @@ dependencies {
     compile project.RETROFIT
     compile project.OKHTTP_LIBRARY
     compile project.MATERIAL_DESIGN_COMPAT
+    compile project.GOOGLE_PLAY_LOCATION
     compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
         transitive = true;
     }

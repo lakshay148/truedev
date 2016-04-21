@@ -7,6 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+
 /**
  * Created by lakshaygirdhar on 23/3/16.
  */
@@ -54,6 +60,36 @@ public class CommonUtils {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         return recyclerView;
+    }
+
+    public static byte[] serialize(Object obj) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ObjectOutputStream os;
+        try {
+            os = new ObjectOutputStream(out);
+            os.writeObject(obj);
+            return out.toByteArray();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object deserialize(byte[] mydata) {
+        ByteArrayInputStream in = new ByteArrayInputStream(mydata);
+        ObjectInputStream is;
+        try {
+            is = new ObjectInputStream(in);
+            return is.readObject();
+        } catch (StreamCorruptedException e) {
+
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
