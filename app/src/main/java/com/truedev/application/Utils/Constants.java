@@ -43,6 +43,8 @@ public class Constants {
 
     public static final int CONNECTION_POOL_SIZE = 4;
     public static final long CONNECTION_MAX_IDLE_TIME_MS = 3000;
+    public static final String EMAIL = "email";
+    public static final String USERNAME = "username";
 
     public static String[] allItems = new String[]{ANALYTICS,LISTVIEWS,NAVIGATION_DRAWER,MAPS,NOTIFICATIONS,CAMERA_ITEMS,TOOL_BAR,MEDIA_STORE};
 
