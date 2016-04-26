@@ -39,6 +39,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "ENVIRONMENT", "\"PROD\""
             buildConfigField "String", "APPLICATION_NAME", "\"Truedev\""
+            buildConfigField "String", "URL",  "\"http://google.com\""
             buildConfigField "long", "SYNC_FREQUENCY", "24*60*60"
             resValue("string", "account_type", defaultConfig.applicationId+".staging.account")
             resValue("string", "content_authority", defaultConfig.applicationId+".staging.SyncAdapter.provider")
@@ -46,6 +47,7 @@ android {
         debug{
             buildConfigField "String", "ENVIRONMENT", "\"DEV\""
             buildConfigField "String", "APPLICATION_NAME", "\"Truedev Debug\""
+            buildConfigField "String", "URL", "\"http://google.com\""
             buildConfigField "long", "SYNC_FREQUENCY", "60*60"
             resValue("string", "account_type", defaultConfig.applicationId+".staging.account")
             resValue("string", "content_authority", defaultConfig.applicationId+".debug.SyncAdapter.provider")

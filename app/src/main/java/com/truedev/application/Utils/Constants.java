@@ -43,6 +43,11 @@ public class Constants {
 
     public static final int CONNECTION_POOL_SIZE = 4;
     public static final long CONNECTION_MAX_IDLE_TIME_MS = 3000;
+    public static final String QUERY = "q";
+    public static final String CITY = "city";
+    public static final String DEVICE_ID = "deviceId";
+    public static final String APP_VERSION_LABEL = "app_version";
+    public static final String APP_VERSION = "version";
     public static final String EMAIL = "email";
     public static final String USERNAME = "username";
 
