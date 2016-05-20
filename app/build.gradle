@@ -68,6 +68,7 @@ dependencies {
     compile fileTree(include: 'Parse-*.jar', dir: 'libs')
     compile project.GOOGLE_MAPS
     compile project.GOOGLE_CLOUD_MESSAGING
+    compile project.GOOGLE_PLUS
     compile project.BUTTERKNIFE
     compile project.RECYCLERVIEW
     compile project.CARD_VIEW

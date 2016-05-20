@@ -48,6 +48,8 @@ public class Constants {
     public static final String DEVICE_ID = "deviceId";
     public static final String APP_VERSION_LABEL = "app_version";
     public static final String APP_VERSION = "version";
+    public static final String EMAIL = "email";
+    public static final String USERNAME = "username";
 
     public static String[] allItems = new String[]{ANALYTICS,LISTVIEWS,NAVIGATION_DRAWER,MAPS,NOTIFICATIONS,CAMERA_ITEMS,TOOL_BAR,MEDIA_STORE};
 
