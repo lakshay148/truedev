@@ -22,7 +22,6 @@ import retrofit.client.OkClient;
  */
 public class RetrofitRequest {
 
-
     //    public static String url = "http://multiplymyleads.co:8000";
     public static String url = BuildConfig.URL;
     //    private static String url = "http://192.168.0.14:8000";
