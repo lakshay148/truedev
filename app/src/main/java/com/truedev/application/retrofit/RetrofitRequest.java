@@ -45,7 +45,7 @@ public class RetrofitRequest {
             })
             .build();
 
-    private static RequestInterface requestInterface = restAdapter.create(RequestInterface.class);
+    public static RequestInterface requestInterface = restAdapter.create(RequestInterface.class);
 
     public static void getSuggestions(String path, HashMap<String, String> params, Callback<AutoSuggestResponse> callback) {
         requestInterface.getSuggestions(path, params, callback);
