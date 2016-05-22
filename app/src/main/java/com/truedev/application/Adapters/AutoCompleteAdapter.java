@@ -10,34 +10,41 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+
 import com.truedev.application.R;
-import com.truedev.application.Utils.Constants;
 import com.truedev.application.models.AutoSuggestData;
-import com.truedev.application.models.AutoSuggestResponse;
-import com.truedev.application.retrofit.RetrofitRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by Lakshay on 26/12/15.
  */
-public class AutoCompleteAdapter extends ArrayAdapter<AutoSuggestData> implements Filterable {
+public class AutoCompleteAdapter<T extends AutoSuggestData> extends ArrayAdapter<T> implements Filterable {
 
-    private ArrayList<AutoSuggestData> mData;
+    private ArrayList<T> mData;
     private String mSuggestPath;
     private HashMap<String, String> mParams;
     private static final String TAG = "AutoCompleteAdapter";
     private Context mContext;
+    private FilterResultsListener mListener;
 
-    public AutoCompleteAdapter(Context context, int resource, String suggestPath, HashMap<String, String> params) {
+    public interface   FilterResultsListener<T> {
+        public ArrayList<T> filterResults(String sequence);
+    }
+
+    /**
+     * @param context
+     * @param resource    tuple layout to be used for autosuggest UI
+     * @param suggestPath
+     * @param params
+     */
+    public AutoCompleteAdapter(Context context, int resource, String suggestPath, HashMap<String, String> params, FilterResultsListener listener) {
         super(context, resource);
         mData = new ArrayList<>();
         mSuggestPath = suggestPath;
+        mListener = listener;
         mContext = context;
         mParams = params;
     }
@@ -48,7 +55,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<AutoSuggestData> implement
     }
 
     @Override
-    public AutoSuggestData getItem(int position) {
+    public T getItem(int position) {
         return mData.get(position);
     }
 
@@ -60,52 +67,38 @@ public class AutoCompleteAdapter extends ArrayAdapter<AutoSuggestData> implement
         return convertView;
     }
 
-
     @Override
     public Filter getFilter() {
         Filter filter = new Filter() {
-
 
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
 
                 final FilterResults results = new FilterResults();
-                mParams.put(Constants.QUERY, constraint + "");
-                Log.d(TAG, "performFiltering: " + mParams.get(Constants.CITY));
-                RetrofitRequest.getSuggestions(mSuggestPath, mParams, new Callback<AutoSuggestResponse>() {
-                    @Override
-                    public void success(AutoSuggestResponse autoSuggestResponse, Response response) {
-                        Log.d(TAG, "success: " + autoSuggestResponse.getData().size());
-                        mData = autoSuggestResponse.getData();
-                        results.values = autoSuggestResponse.getData();
-                        results.count = autoSuggestResponse.getData().size();
+                if (constraint != null) {
+                    ArrayList<T> response = mListener.filterResults(constraint.toString());
+                    if (response != null) {
+                        mData = (ArrayList<T>) response;
+                        results.values = response;
+                        results.count = response.size();
                         notifyDataSetChanged();
                     }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Log.d(TAG, "failure: " + error.getLocalizedMessage());
-                    }
-                });
+                }
                 return results;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                Log.d(TAG, "publishResults: " + constraint);
                 if (results != null && results.count > 0) {
-                    Log.d(TAG, "publishResults: " + results.count);
                     notifyDataSetChanged();
                 } else {
-                    Log.d(TAG, "publishResults: results null");
                     notifyDataSetInvalidated();
                 }
             }
 
             @Override
             public CharSequence convertResultToString(Object resultValue) {
-                Log.d(TAG, "convertResultToString: resultValue " + ((AutoSuggestData) resultValue).getId() + "convertResultToString: resultValue" + ((AutoSuggestData) resultValue).getValue());
-                return resultValue == null ? "" : ((AutoSuggestData) resultValue).getValue();
+                return resultValue == null ? "" : ((T) resultValue).getValue();
             }
         };
         return filter;
